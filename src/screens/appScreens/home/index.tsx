@@ -14,13 +14,7 @@ const HomeScreen: React.FC = () => {
   };
 
   return (
-    <Page
-      isSafeAreaView
-      scrollBehavior="keyboardAwareScroll"
-      showHeader
-      title="Verification"
-      leftIcon="arrow-back-outline"
-      onLeftPress={onPressBack}>
+    <Page isSafeAreaView scrollBehavior="keyboardAwareScroll">
       <View style={style.container}>
         <Dropdown items={items} onSelect={handleSelect} />
       </View>

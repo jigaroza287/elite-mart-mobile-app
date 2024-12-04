@@ -3,7 +3,6 @@ import {colors, spacing, typography} from '../../theme';
 
 export default StyleSheet.create({
   container: {
-    margin: spacing.medium,
     alignItems: 'center',
   },
   dropdown: {
