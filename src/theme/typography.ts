@@ -19,6 +19,10 @@ const typography = StyleSheet.create({
     fontSize: fontSize.fontSizeSmall,
     lineHeight: normalize(18),
   },
+  body2Bold: {
+    fontFamily: fontFamily.fontFamilyBlack,
+    fontSize: fontSize.fontSizeRegular,
+  },
   body2: {
     fontFamily: fontFamily.fontFamilySemiBold,
     fontSize: fontSize.fontSizeRegular,

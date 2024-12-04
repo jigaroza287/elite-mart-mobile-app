@@ -11,8 +11,8 @@ const colors = {
   green: '#00A86B',
   yellow: '#FCAC12',
   blue: '#0077FF',
-  disabledButton: '#bdc3c7',
-  disabledText: '#7f8c8d',
+  lightGrey: '#f4f4f4',
+  grey: '#7f8c8d',
 };
 
 export default colors;

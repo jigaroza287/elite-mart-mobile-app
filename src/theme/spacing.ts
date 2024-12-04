@@ -1,6 +1,7 @@
 import normalize from 'react-native-normalize';
 
 const spacing = {
+  atom: normalize(1),
   xTiny: normalize(2),
   tiny: normalize(4),
   xSmall: normalize(8),
