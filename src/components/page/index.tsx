@@ -40,8 +40,7 @@ const Page: React.FC<PageProps> = ({
         <KeyboardAwareScrollView
           bounces={false}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={style.contentContainer}
-          {...headerProps}>
+          contentContainerStyle={style.contentContainer}>
           {children}
         </KeyboardAwareScrollView>
       );
@@ -52,7 +51,7 @@ const Page: React.FC<PageProps> = ({
         </View>
       );
     }
-  }, [scrollBehavior, safeAreaColor, children, headerProps]);
+  }, [scrollBehavior, safeAreaColor, children]);
 
   return (
     <View style={style.container}>

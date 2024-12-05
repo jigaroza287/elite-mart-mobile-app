@@ -1,22 +1,18 @@
 import React from 'react';
 import {View} from 'react-native';
-import Dropdown, {DropdownItem} from '../../../components/dropdown';
 import Page from '../../../components/page';
-import {getDropDownItemsDemographics} from '../../../utils/functionUtils';
 import style from './style';
+import {SearchBar} from '../../../components';
 
 const HomeScreen: React.FC = () => {
-  const onPressBack = () => {};
-  const items: DropdownItem[] = getDropDownItemsDemographics();
-
-  const handleSelect = (item: {label: string; value: number | string}) => {
-    console.log('Dropdown item selected: ', item);
+  const handleSearch = (query: string) => {
+    console.log('Searching for:', query);
   };
 
   return (
-    <Page isSafeAreaView scrollBehavior="keyboardAwareScroll">
+    <Page isSafeAreaView>
       <View style={style.container}>
-        <Dropdown items={items} onSelect={handleSelect} />
+        <SearchBar placeholder="Type to search..." onSearch={handleSearch} />
       </View>
     </Page>
   );
