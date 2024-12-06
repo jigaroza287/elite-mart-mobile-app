@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import normalize from 'react-native-normalize';
 import fontFamily from './typography/fontFamily';
 

@@ -1,5 +1,5 @@
-import {StyleSheet, ViewStyle} from 'react-native';
-import {colors, spacing, typography} from '../../theme';
+import { StyleSheet, ViewStyle } from 'react-native';
+import { colors, spacing, typography } from '../../theme';
 
 export default StyleSheet.create({
   content: {
@@ -22,7 +22,7 @@ export default StyleSheet.create({
     borderWidth: 1,
   },
   disabledButton: {
-    backgroundColor: colors.disabledButton,
+    backgroundColor: colors.grey,
   },
   primaryText: {
     color: colors.light80,
@@ -34,7 +34,7 @@ export default StyleSheet.create({
     color: colors.dark50,
   },
   disabledText: {
-    color: colors.disabledText,
+    color: colors.grey,
   },
   fullWidth: {
     width: '100%',

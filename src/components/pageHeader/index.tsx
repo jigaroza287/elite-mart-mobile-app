@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import {
   Platform,
   SafeAreaView,
@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {colors, spacing} from '../../theme';
+import { colors, spacing } from '../../theme';
 import style from './style';
 
 export interface PageHeaderProps {
@@ -78,7 +78,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
     <>
       {headerStatusBar}
 
-      <View style={[style.headerContainer, {backgroundColor}]}>
+      <View style={[style.headerContainer, { backgroundColor }]}>
         {leftButton}
         {titleComponent}
         {rightButton}

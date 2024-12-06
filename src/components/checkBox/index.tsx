@@ -1,7 +1,7 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'; // Icon library for checkbox
-import {colors, spacing} from '../../theme';
+import { colors, spacing } from '../../theme';
 import style from './style';
 
 type CheckboxProps = {

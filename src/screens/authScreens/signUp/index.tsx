@@ -1,12 +1,12 @@
-import {yupResolver} from '@hookform/resolvers/yup';
-import React, {useState} from 'react';
-import {useForm} from 'react-hook-form';
-import {Text, View} from 'react-native';
+import { yupResolver } from '@hookform/resolvers/yup';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Text, View } from 'react-native';
 import Button from '../../../components/button';
 import Checkbox from '../../../components/checkBox';
 import FormInput from '../../../components/formInput';
 import Page from '../../../components/page';
-import {loginSchema} from '../../../utils/validationSchemas';
+import { loginSchema } from '../../../utils/validationSchemas';
 import style from './style';
 
 interface LoginFormInputs {
@@ -20,7 +20,7 @@ const SignUpScreen: React.FC = () => {
     control,
     // watch,
     handleSubmit,
-    formState: {errors},
+    formState: { errors },
   } = useForm<LoginFormInputs>({
     resolver: yupResolver(loginSchema),
     defaultValues: {

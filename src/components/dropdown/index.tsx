@@ -1,9 +1,9 @@
-import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
-import React, {useCallback, useRef, useState} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import React, { useCallback, useRef, useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { spacing } from '../../theme';
 import style from './style';
-import {spacing} from '../../theme';
 
 export interface DropdownItem {
   label: string;
@@ -16,7 +16,11 @@ type DropdownProps = {
   onSelect: (item: DropdownItem) => void;
 };
 
-const Dropdown: React.FC<DropdownProps> = ({items, placeholder, onSelect}) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  items,
+  placeholder,
+  onSelect,
+}) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [selectedItem, setSelectedItem] = useState<DropdownItem | null>(null);
   const firstItem = items.length > 0 ? items[0].label : '';

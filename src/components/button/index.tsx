@@ -1,16 +1,16 @@
 import React from 'react';
 import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
   GestureResponderEvent,
-  ViewStyle,
+  StyleSheet,
+  Text,
   TextStyle,
+  TouchableOpacity,
   View,
+  ViewStyle,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import style, {commonButtonStyle, commonButtonTextStyle} from './style';
-import {colors, spacing} from '../../theme';
+import { colors, spacing } from '../../theme';
+import style, { commonButtonStyle, commonButtonTextStyle } from './style';
 
 type ButtonType = 'primary' | 'secondary' | 'tertiary';
 

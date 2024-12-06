@@ -1,5 +1,5 @@
 import colors from './colors';
-import typography from './typography';
 import spacing from './spacing';
+import typography from './typography';
 
-export {colors, typography, spacing};
+export { colors, spacing, typography };

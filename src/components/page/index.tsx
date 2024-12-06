@@ -1,8 +1,8 @@
-import React, {useMemo} from 'react';
-import {SafeAreaView, ScrollView, View} from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {colors} from '../../theme';
-import PageHeader, {PageHeaderProps} from '../pageHeader';
+import React, { useMemo } from 'react';
+import { SafeAreaView, ScrollView, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { colors } from '../../theme';
+import PageHeader, { PageHeaderProps } from '../pageHeader';
 import style from './style';
 
 type ScrollBehavior = 'none' | 'scroll' | 'keyboardAwareScroll';
@@ -46,7 +46,7 @@ const Page: React.FC<PageProps> = ({
       );
     } else {
       return (
-        <View style={[style.container, {backgroundColor: safeAreaColor}]}>
+        <View style={[style.container, { backgroundColor: safeAreaColor }]}>
           {children}
         </View>
       );

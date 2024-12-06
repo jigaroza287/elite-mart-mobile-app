@@ -1,5 +1,10 @@
 import React from 'react';
-import {FlatList, FlatListProps, ListRenderItem, ViewStyle} from 'react-native';
+import {
+  FlatList,
+  FlatListProps,
+  ListRenderItem,
+  ViewStyle,
+} from 'react-native';
 import style from './style';
 
 interface HorizontalListProps<T> extends Omit<FlatListProps<T>, 'renderItem'> {
@@ -13,7 +18,7 @@ const HorizontalList = <T,>({
   contentContainerStyle,
   ...props
 }: HorizontalListProps<T>) => {
-  const renderListItem: ListRenderItem<T> = ({item}) => renderItem(item);
+  const renderListItem: ListRenderItem<T> = ({ item }) => renderItem(item);
 
   return (
     <FlatList

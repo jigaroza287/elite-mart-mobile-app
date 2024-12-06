@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import accountReducer from './slices/accountSlice';
 import authReducer from './slices/authSlice';
 

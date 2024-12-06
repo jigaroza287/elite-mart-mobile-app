@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {colors, spacing, typography} from '../../theme';
+import { StyleSheet } from 'react-native';
 import normalize from 'react-native-normalize';
+import { colors, spacing, typography } from '../../theme';
 
 export default StyleSheet.create({
   container: {

@@ -1,5 +1,5 @@
-import React, {useCallback, useMemo} from 'react';
-import {Controller, ControllerRenderProps} from 'react-hook-form';
+import React, { useCallback, useMemo } from 'react';
+import { Controller, ControllerRenderProps } from 'react-hook-form';
 import {
   Text,
   TextInput,
@@ -8,8 +8,8 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { spacing } from '../../theme';
 import style from './style';
-import {spacing} from '../../theme';
 
 interface FormInputProps extends TextInputProps {
   name: string;
@@ -34,7 +34,11 @@ const FormInput: React.FC<FormInputProps> = ({
   );
 
   const renderTextField = useCallback(
-    ({field: {onChange, onBlur, value}}: {field: ControllerRenderProps}) => {
+    ({
+      field: { onChange, onBlur, value },
+    }: {
+      field: ControllerRenderProps;
+    }) => {
       return (
         <View style={style.inputContainer}>
           <TextInput

@@ -1,18 +1,18 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
+import { SearchBar } from '../../../components';
 import Page from '../../../components/page';
 import style from './style';
-import {SearchBar} from '../../../components';
 
 const HomeScreen: React.FC = () => {
-  const handleSearch = (query: string) => {
-    console.log('Searching for:', query);
+  const searchBarTapped = () => {
+    console.log('SearchBar tapped');
   };
 
   return (
     <Page isSafeAreaView>
       <View style={style.container}>
-        <SearchBar placeholder="Type to search..." onSearch={handleSearch} />
+        <SearchBar placeholder="Type to search..." onPress={searchBarTapped} />
       </View>
     </Page>
   );

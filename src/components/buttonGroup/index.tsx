@@ -1,5 +1,5 @@
 import React from 'react';
-import {GestureResponderEvent, View, ViewStyle} from 'react-native';
+import { GestureResponderEvent, View, ViewStyle } from 'react-native';
 import Button from '../button';
 import style from './style';
 

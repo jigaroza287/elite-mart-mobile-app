@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Account {
   id: string;
@@ -30,5 +30,5 @@ const accountSlice = createSlice({
   },
 });
 
-export const {addAccount, removeAccount} = accountSlice.actions;
+export const { addAccount, removeAccount } = accountSlice.actions;
 export default accountSlice.reducer;

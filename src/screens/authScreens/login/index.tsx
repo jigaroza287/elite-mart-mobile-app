@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button, Text} from 'react-native';
-import {useDispatch} from 'react-redux';
+import { Button, Text } from 'react-native';
+import { useDispatch } from 'react-redux';
 import Page from '../../../components/page';
-import {login} from '../../../redux/slices/authSlice';
+import { login } from '../../../redux/slices/authSlice';
 
 const LoginScreen: React.FC = () => {
   const dispatch = useDispatch();
