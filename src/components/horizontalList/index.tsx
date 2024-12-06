@@ -5,7 +5,6 @@ import {
   ListRenderItem,
   ViewStyle,
 } from 'react-native';
-import style from './style';
 
 interface HorizontalListProps<T> extends Omit<FlatListProps<T>, 'renderItem'> {
   renderItem: (item: T) => React.ReactElement | null;
@@ -27,7 +26,7 @@ const HorizontalList = <T,>({
       showsHorizontalScrollIndicator={false}
       renderItem={renderListItem}
       keyExtractor={(item, index) => index.toString()}
-      contentContainerStyle={[style.listContainer, contentContainerStyle]}
+      contentContainerStyle={contentContainerStyle}
       {...props}
     />
   );

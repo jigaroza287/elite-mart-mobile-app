@@ -5,7 +5,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    padding: spacing.medium,
+    paddingLeft: spacing.large,
     justifyContent: 'flex-start',
   },
 });

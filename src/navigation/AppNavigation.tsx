@@ -16,7 +16,7 @@ const AppTabNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      screenOptions={{ headerShown: false }}>
+      screenOptions={{ headerShown: false, animation: 'shift' }}>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Explore" component={OffersScreen} />
       <Tab.Screen name="Cart" component={CartScreen} />

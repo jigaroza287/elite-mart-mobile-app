@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors, spacing, typography } from '../../theme';
 
 export default StyleSheet.create({
@@ -11,7 +11,7 @@ export default StyleSheet.create({
     borderWidth: spacing.atom,
     paddingHorizontal: spacing.small,
     height: spacing.xxLarge,
-    width: Dimensions.get('window').width - spacing.large,
+    width: '100%',
     alignSelf: 'center',
     marginVertical: spacing.xSmall,
   },

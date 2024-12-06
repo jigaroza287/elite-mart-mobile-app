@@ -31,6 +31,10 @@ const typography = StyleSheet.create({
     fontFamily: fontFamily.fontFamilyMedium,
     fontSize: fontSize.fontSizeRegular,
   },
+  title3Bold: {
+    fontFamily: fontFamily.fontFamilyBold,
+    fontSize: fontSize.fontSizeMedium,
+  },
   title3: {
     fontFamily: fontFamily.fontFamilySemiBold,
     fontSize: fontSize.fontSizeMedium,
