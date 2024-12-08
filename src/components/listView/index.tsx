@@ -11,7 +11,7 @@ interface HorizontalListProps<T> extends Omit<FlatListProps<T>, 'renderItem'> {
   contentContainerStyle?: ViewStyle;
 }
 
-const HorizontalList = <T,>({
+const ListView = <T,>({
   data,
   renderItem,
   contentContainerStyle,
@@ -22,14 +22,14 @@ const HorizontalList = <T,>({
   return (
     <FlatList
       data={data}
-      horizontal
       showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
       renderItem={renderListItem}
-      keyExtractor={(item, index) => index.toString()}
+      keyExtractor={(_, index) => index.toString()}
       contentContainerStyle={contentContainerStyle}
       {...props}
     />
   );
 };
 
-export default HorizontalList;
+export default ListView;

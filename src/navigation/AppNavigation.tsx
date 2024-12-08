@@ -5,23 +5,43 @@ import React from 'react';
 import CartScreen from '../screens/appScreens/cart';
 import OffersScreen from '../screens/appScreens/explore';
 import HomeScreen from '../screens/appScreens/home';
+import ProductDetailsScreen from '../screens/appScreens/productDetails';
+import ProductListScreen from '../screens/appScreens/productList';
 import ProfileScreen from '../screens/appScreens/profile';
-import { AppTabParamList, RootStackParamList } from './AppNavigationTypes';
+import {
+  AppTabParamList,
+  HomeStackParamList,
+  RootStackParamList,
+} from './AppNavigationTypes';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
 
 const AppTabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="HomeTab"
       screenOptions={{ headerShown: false, animation: 'shift' }}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Explore" component={OffersScreen} />
-      <Tab.Screen name="Cart" component={CartScreen} />
-      <Tab.Screen name="You" component={ProfileScreen} />
+      <Tab.Screen name="HomeTab" component={HomeStackNavigator} />
+      <Tab.Screen name="ExploreTab" component={OffersScreen} />
+      <Tab.Screen name="CartTab" component={CartScreen} />
+      <Tab.Screen name="YouTab" component={ProfileScreen} />
     </Tab.Navigator>
+  );
+};
+
+const HomeStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="ProductList" component={ProductListScreen} />
+      <HomeStack.Screen
+        name="ProductDetails"
+        component={ProductDetailsScreen}
+      />
+    </Stack.Navigator>
   );
 };
 

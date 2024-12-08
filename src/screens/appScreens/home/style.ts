@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { colors, spacing } from '../../../theme';
+import { spacing } from '../../../theme';
+import constants from '../../../utils/constants';
 
 export default StyleSheet.create({
   container: {
@@ -8,5 +9,9 @@ export default StyleSheet.create({
   },
   searchBarContainer: {
     paddingRight: spacing.large,
+  },
+  productContainer: {
+    width: constants.productCardWidth,
+    marginRight: spacing.medium,
   },
 });

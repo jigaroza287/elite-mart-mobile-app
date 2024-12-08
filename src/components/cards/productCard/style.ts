@@ -4,15 +4,18 @@ import constants from '../../../utils/constants';
 
 export default StyleSheet.create({
   container: {
-    alignItems: 'flex-start',
-    marginRight: spacing.medium,
-    width: constants.productCardWidth,
+    backgroundColor: colors.lightGrey,
+    borderRadius: spacing.xSmall,
+    paddingBottom: spacing.medium,
   },
   image: {
-    borderRadius: spacing.xSmall,
-    backgroundColor: colors.lightGrey,
-    width: constants.productCardWidth,
+    width: '100%',
     aspectRatio: constants.productCardImageRatio,
+    borderTopStartRadius: spacing.xSmall,
+    borderTopEndRadius: spacing.xSmall,
+  },
+  detailsView: {
+    marginLeft: spacing.xSmall,
   },
   productName: {
     ...typography.tiny,
