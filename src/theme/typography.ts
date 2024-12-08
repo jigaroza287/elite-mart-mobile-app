@@ -9,6 +9,11 @@ const typography = StyleSheet.create({
     fontSize: fontSize.fontSizeTiny,
     lineHeight: normalize(12),
   },
+  tinyBold: {
+    fontFamily: fontFamily.fontFamilyBold,
+    fontSize: fontSize.fontSizeTiny,
+    lineHeight: normalize(12),
+  },
   small: {
     fontFamily: fontFamily.fontFamilyMedium,
     fontSize: fontSize.fontSizeXSmall,

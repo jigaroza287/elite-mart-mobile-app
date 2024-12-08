@@ -1,15 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import {
   CategoryCard,
   HorizontalList,
-  HorizontalSection,
+  HomeSection,
+  ProductCard,
   SearchBar,
 } from '../../../components';
 import Page from '../../../components/page';
 import { AppTabParamList } from '../../../navigation/AppNavigationTypes';
+import useHome from '../../../redux/features/home/useHome';
 import style from './style';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
@@ -17,36 +19,14 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
   'Home'
 >;
 
-const mockData = [
-  {
-    id: 1,
-    imageUrl: 'https://placehold.co/150x150/000000/FFFFFF/jpg',
-    label: 'Hoodies',
-  },
-  {
-    id: 2,
-    imageUrl: 'https://placehold.co/150x150/000000/F0F0F0/jpg',
-    label: 'Shorts',
-  },
-  {
-    id: 3,
-    imageUrl: 'https://placehold.co/150x150/000000/F4F4F4/jpg',
-    label: 'Shoes',
-  },
-  {
-    id: 4,
-    imageUrl: 'https://placehold.co/150x150/000000/F9F9F9/jpg',
-    label: 'Bags',
-  },
-  {
-    id: 5,
-    imageUrl: 'https://placehold.co/150x150/000000/F9F9F9/jpg',
-    label: 'Accessories',
-  },
-];
-
 const HomeScreen: React.FC = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
+  const { homeData, loading, error, fetchHomeData, isSucceed } = useHome();
+
+  useEffect(() => {
+    fetchHomeData();
+  }, []);
+
   const searchBarTapped = () => {
     navigation.navigate('Explore');
   };
@@ -58,17 +38,44 @@ const HomeScreen: React.FC = () => {
   return (
     <Page isSafeAreaView>
       <View style={style.container}>
-        <SearchBar placeholder="Type to search..." onPress={searchBarTapped} />
-        <HorizontalSection
+        <View style={style.searchBarContainer}>
+          <SearchBar
+            placeholder="Type to search..."
+            onPress={searchBarTapped}
+          />
+        </View>
+
+        {/* Categories Section */}
+        <HomeSection
           title="Categories"
           onViewAllPress={handleCategoriesViewAllTap}>
           <HorizontalList
-            data={mockData}
+            data={homeData?.data?.categories ?? []}
             renderItem={item => (
-              <CategoryCard imageUrl={item.imageUrl} label={item.label} />
+              <CategoryCard imageUrl={item.image} label={item.name} />
             )}
           />
-        </HorizontalSection>
+        </HomeSection>
+
+        {/* Top Selling Section */}
+        <HomeSection
+          title="Top Selling"
+          onViewAllPress={handleCategoriesViewAllTap}>
+          <HorizontalList
+            data={homeData?.data?.topSellingProducts ?? []}
+            renderItem={item => <ProductCard product={item} />}
+          />
+        </HomeSection>
+
+        {/* New Arrival Section */}
+        <HomeSection
+          title="New Arrival"
+          onViewAllPress={handleCategoriesViewAllTap}>
+          <HorizontalList
+            data={homeData?.data?.newArrivals ?? []}
+            renderItem={item => <ProductCard product={item} />}
+          />
+        </HomeSection>
       </View>
     </Page>
   );

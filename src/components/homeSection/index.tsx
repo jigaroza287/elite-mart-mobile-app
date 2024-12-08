@@ -2,13 +2,13 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import style from './style';
 
-interface SectionProps {
+interface HomeSectionProps {
   title: string;
   onViewAllPress: () => void;
   children: React.ReactNode;
 }
 
-const Section: React.FC<SectionProps> = ({
+const HomeSection: React.FC<HomeSectionProps> = ({
   title,
   onViewAllPress,
   children,
@@ -24,4 +24,4 @@ const Section: React.FC<SectionProps> = ({
   </View>
 );
 
-export default Section;
+export default HomeSection;

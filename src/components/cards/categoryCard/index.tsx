@@ -11,7 +11,7 @@ interface SquareImageWithLabelProps {
 const SquareImageWithLabel: React.FC<SquareImageWithLabelProps> = ({
   imageUrl,
   label,
-  size = Dimensions.get('window').width / 4,
+  size = Dimensions.get('window').width / 6,
 }) => {
   return (
     <View style={[style.container, { width: size }]}>
