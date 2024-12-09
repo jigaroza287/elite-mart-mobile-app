@@ -1,7 +1,6 @@
-import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import {
   BackButton,
   ListView,
@@ -11,9 +10,9 @@ import {
 import Page from '../../../components/page';
 import { HomeStackParamList } from '../../../navigation/AppNavigationTypes';
 import { Product } from '../../../redux/features/home/homeTypes';
-import useHome from '../../../redux/features/home/useHome';
+import useProducts from '../../../redux/features/product/useProduct';
 import style from './style';
-import { spacing } from '../../../theme';
+import { ProductListRequest } from '../../../redux/features/product/productTypes';
 
 type ProductListProps = NativeStackScreenProps<
   HomeStackParamList,
@@ -24,13 +23,23 @@ const ProductListScreen: React.FC<ProductListProps> = ({
   navigation,
   route,
 }) => {
-  const { isSearchVisible = false } = route.params || {};
-
-  const { homeData, loading, error, fetchHomeData, isSucceed } = useHome();
+  const { isSearchVisible = false, filter } = route.params || {};
+  const { products, loading, error, fetchProducts, currentPage, totalPages } =
+    useProducts();
+  const productListRequestParams: ProductListRequest = {
+    filter,
+    page: 1,
+  };
 
   useEffect(() => {
-    fetchHomeData();
+    fetchProducts(productListRequestParams);
   }, []);
+
+  const loadMoreProducts = () => {
+    if (!loading && currentPage < totalPages) {
+      fetchProducts({ ...productListRequestParams, page: currentPage + 1 });
+    }
+  };
 
   const handleSearch = (query: string) => {
     console.log('You searched: ', query);
@@ -45,7 +54,7 @@ const ProductListScreen: React.FC<ProductListProps> = ({
         )}
         <ListView
           numColumns={2}
-          data={homeData?.data?.topSellingProducts ?? []}
+          data={products}
           renderItem={(item: Product) => (
             <ProductCard
               product={item}
@@ -53,6 +62,11 @@ const ProductListScreen: React.FC<ProductListProps> = ({
             />
           )}
           style={style.contentContainer}
+          onEndReached={loadMoreProducts}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={
+            loading ? <ActivityIndicator size="large" /> : null
+          }
         />
       </View>
     </Page>

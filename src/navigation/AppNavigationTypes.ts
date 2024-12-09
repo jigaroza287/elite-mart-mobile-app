@@ -1,3 +1,5 @@
+import { ProductListFilters } from '../utils/constants';
+
 export type AuthStackParamList = {
   SignUp: undefined;
   Login: undefined;
@@ -14,7 +16,7 @@ export type AppTabParamList = {
 
 export type HomeStackParamList = {
   Home: undefined;
-  ProductList: { isSearchVisible: boolean };
+  ProductList: { isSearchVisible: boolean; filter?: ProductListFilters };
   ProductDetails: undefined;
 };
 
