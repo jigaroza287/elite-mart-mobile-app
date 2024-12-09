@@ -6,14 +6,12 @@ import {
 import { HomeResponse } from './homeTypes';
 
 interface HomeState {
-  isSucceed: boolean;
   loading: boolean;
   data?: HomeResponse;
   error: string | null;
 }
 
 const initialState: HomeState = {
-  isSucceed: false,
   loading: false,
   data: undefined,
   error: null,
@@ -22,21 +20,19 @@ const initialState: HomeState = {
 const homeReducer = (state = initialState, action: any): HomeState => {
   switch (action.type) {
     case FETCH_HOME_REQUEST:
-      return { ...state, loading: true, isSucceed: false };
+      return { ...state, loading: true };
     case FETCH_HOME_SUCCESS:
       return {
         ...state,
         loading: false,
         data: action.payload,
         error: null,
-        isSucceed: true,
       };
     case FETCH_HOME_FAILURE:
       return {
         ...state,
         loading: false,
         error: action.payload,
-        isSucceed: false,
       };
     default:
       return state;

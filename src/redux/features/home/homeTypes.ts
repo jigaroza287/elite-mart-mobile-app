@@ -8,6 +8,7 @@ export interface Category {
 
 export interface Product {
   id: number;
+  categoryId: number;
   name: string;
   description: string;
   demographic: Demographics;
@@ -19,6 +20,7 @@ export interface Product {
 
 export interface ProductVariant {
   id: number;
+  productId: number;
   size: ProductSize;
   color: string;
   sku: string;

@@ -24,7 +24,7 @@ type HomeProp = NativeStackNavigationProp<HomeStackParamList, 'Home'> &
 
 const HomeScreen: React.FC = () => {
   const navigation = useNavigation<HomeProp>();
-  const { homeData, loading, error, fetchHomeData, isSucceed } = useHome();
+  const { homeData, loading, error, fetchHomeData } = useHome();
 
   useEffect(() => {
     fetchHomeData();
@@ -34,8 +34,20 @@ const HomeScreen: React.FC = () => {
     navigation.navigate('ExploreTab');
   };
 
-  const handleCategoriesViewAllTap = () => {
-    navigation.navigate('ProductList', { isSearchVisible: false });
+  const handleCategoriesViewAllTap = () => {};
+
+  const handleTopRatedViewAllTap = () => {
+    navigation.navigate('ProductList', {
+      isSearchVisible: false,
+      filter: 'top_rated',
+    });
+  };
+
+  const handleNewArrivalViewAllTap = () => {
+    navigation.navigate('ProductList', {
+      isSearchVisible: false,
+      filter: 'new_arrivals',
+    });
   };
 
   return (
@@ -63,8 +75,8 @@ const HomeScreen: React.FC = () => {
 
         {/* Top Selling Section */}
         <HomeSection
-          title="Top Selling"
-          onViewAllPress={handleCategoriesViewAllTap}>
+          title="Top Rated"
+          onViewAllPress={handleTopRatedViewAllTap}>
           <ListView
             horizontal
             data={homeData?.data?.topSellingProducts ?? []}
@@ -80,7 +92,7 @@ const HomeScreen: React.FC = () => {
         {/* New Arrival Section */}
         <HomeSection
           title="New Arrival"
-          onViewAllPress={handleCategoriesViewAllTap}>
+          onViewAllPress={handleNewArrivalViewAllTap}>
           <ListView
             horizontal
             data={homeData?.data?.newArrivals ?? []}

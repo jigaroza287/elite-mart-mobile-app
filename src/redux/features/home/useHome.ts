@@ -1,22 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../store';
-import { fetchUsersThunk } from './homeActions';
+import { AppDispatch, RootState } from '../../store';
+import { fetchHomeDataThunk } from './homeActions';
 
 const useHome = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { data, loading, error, isSucceed } = useSelector(
+  const { data, loading, error } = useSelector(
     (state: RootState) => state.home,
   );
 
   const fetchHomeData = () => {
-    dispatch(fetchUsersThunk());
+    dispatch(fetchHomeDataThunk());
   };
 
   return {
     homeData: data,
     loading,
     error,
-    isSucceed,
     fetchHomeData,
   };
 };

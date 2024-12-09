@@ -6,22 +6,22 @@ export const FETCH_HOME_REQUEST = 'FETCH_HOME_REQUEST';
 export const FETCH_HOME_SUCCESS = 'FETCH_HOME_SUCCESS';
 export const FETCH_HOME_FAILURE = 'FETCH_HOME_FAILURE';
 
-export const fetchUsersRequest = () => ({ type: FETCH_HOME_REQUEST });
-export const fetchUsersSuccess = (homeData: HomeResponse) => ({
+export const fetchHomeDataRequest = () => ({ type: FETCH_HOME_REQUEST });
+export const fetchHomeDataSuccess = (homeData: HomeResponse) => ({
   type: FETCH_HOME_SUCCESS,
   payload: homeData,
 });
-export const fetchUsersFailure = (error: string) => ({
+export const fetchHomeDataFailure = (error: string) => ({
   type: FETCH_HOME_FAILURE,
   payload: error,
 });
 
-export const fetchUsersThunk = () => async (dispatch: Dispatch) => {
-  dispatch(fetchUsersRequest());
+export const fetchHomeDataThunk = () => async (dispatch: Dispatch) => {
+  dispatch(fetchHomeDataRequest());
   try {
-    const users = await fetchHomeData();
-    dispatch(fetchUsersSuccess(users));
+    const homeData = await fetchHomeData();
+    dispatch(fetchHomeDataSuccess(homeData));
   } catch (error: any) {
-    dispatch(fetchUsersFailure(error.message));
+    dispatch(fetchHomeDataFailure(error.message));
   }
 };
