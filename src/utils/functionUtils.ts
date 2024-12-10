@@ -1,14 +1,18 @@
 import { DropdownItem } from '../components/dropdown';
-import constants from './constants';
+import constants, { ProductListFilters } from './constants';
 
-const getDropDownItemsDemographics = (): DropdownItem[] => {
-  const items: DropdownItem[] = [];
-  let counter = 1;
+const productScreenTitle = (filter?: ProductListFilters): string => {
+  switch (filter) {
+    case 'top_rated':
+      return 'Top Rated Products';
+    case 'new_arrivals':
+      return 'New Arrivals';
+    case 'discounts':
+      return 'Discounted Products';
 
-  for (const demographic of Object.values(constants.Demographics)) {
-    items.push({ label: demographic, value: counter++ });
+    default:
+      return '';
   }
-  return items;
 };
 
-export { getDropDownItemsDemographics };
+export { productScreenTitle };

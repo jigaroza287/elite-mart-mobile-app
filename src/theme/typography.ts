@@ -44,6 +44,10 @@ const typography = StyleSheet.create({
     fontFamily: fontFamily.fontFamilySemiBold,
     fontSize: fontSize.fontSizeMedium,
   },
+  title2Black: {
+    fontFamily: fontFamily.fontFamilyBlack,
+    fontSize: fontSize.fontSizeLarge,
+  },
   title2: {
     fontFamily: fontFamily.fontFamilySemiBold,
     fontSize: fontSize.fontSizeLarge,

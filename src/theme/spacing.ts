@@ -13,6 +13,9 @@ const spacing = {
   xxLarge: normalize(48),
   xxxLarge: normalize(56),
   huge: normalize(64),
+  xHuge: normalize(72),
+  xxHuge: normalize(80),
+  xxxHuge: normalize(88),
 };
 
 export default spacing;

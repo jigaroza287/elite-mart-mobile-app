@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import {
   BackButton,
   ListView,
@@ -13,6 +13,7 @@ import { Product } from '../../../redux/features/home/homeTypes';
 import useProducts from '../../../redux/features/product/useProduct';
 import style from './style';
 import { ProductListRequest } from '../../../redux/features/product/productTypes';
+import { productScreenTitle } from '../../../utils/functionUtils';
 
 type ProductListProps = NativeStackScreenProps<
   HomeStackParamList,
@@ -49,6 +50,7 @@ const ProductListScreen: React.FC<ProductListProps> = ({
     <Page isSafeAreaView scrollBehavior="none">
       <View style={style.container}>
         <BackButton onPress={() => navigation.goBack()} />
+        <Text style={style.pageTitle}>{productScreenTitle(filter)}</Text>
         {isSearchVisible && (
           <SearchBar placeholder="Type to search..." onSearch={handleSearch} />
         )}

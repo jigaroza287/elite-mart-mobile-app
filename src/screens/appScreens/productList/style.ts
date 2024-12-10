@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, spacing } from '../../../theme';
+import { colors, spacing, typography } from '../../../theme';
 
 export default StyleSheet.create({
   container: {
@@ -7,7 +7,11 @@ export default StyleSheet.create({
   },
   contentContainer: {
     marginTop: spacing.medium,
-    marginBottom: spacing.xxxLarge,
+    marginBottom: spacing.xxxHuge,
+  },
+  pageTitle: {
+    ...typography.title2Black,
+    marginTop: spacing.small,
   },
   productContainer: {
     flex: 1,
