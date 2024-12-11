@@ -1,3 +1,4 @@
+import { Product } from '../redux/features/home/homeTypes';
 import { ProductListFilters } from '../utils/constants';
 
 export type AuthStackParamList = {
@@ -17,7 +18,7 @@ export type AppTabParamList = {
 export type HomeStackParamList = {
   Home: undefined;
   ProductList: { isSearchVisible: boolean; filter?: ProductListFilters };
-  ProductDetails: undefined;
+  ProductDetails: { product: Product };
 };
 
 export type RootStackParamList = {

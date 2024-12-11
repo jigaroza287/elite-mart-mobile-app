@@ -10,10 +10,10 @@ import {
 import Page from '../../../components/page';
 import { HomeStackParamList } from '../../../navigation/AppNavigationTypes';
 import { Product } from '../../../redux/features/home/homeTypes';
-import useProducts from '../../../redux/features/product/useProduct';
-import style from './style';
 import { ProductListRequest } from '../../../redux/features/product/productTypes';
+import useProducts from '../../../redux/features/product/useProduct';
 import { productScreenTitle } from '../../../utils/functionUtils';
+import style from './style';
 
 type ProductListProps = NativeStackScreenProps<
   HomeStackParamList,
@@ -46,6 +46,10 @@ const ProductListScreen: React.FC<ProductListProps> = ({
     console.log('You searched: ', query);
   };
 
+  const handleProductTap = (product: Product) => {
+    navigation.navigate('ProductDetails', { product });
+  };
+
   return (
     <Page isSafeAreaView scrollBehavior="none">
       <View style={style.container}>
@@ -61,6 +65,7 @@ const ProductListScreen: React.FC<ProductListProps> = ({
             <ProductCard
               product={item}
               containerStyle={style.productContainer}
+              onPress={handleProductTap}
             />
           )}
           style={style.contentContainer}

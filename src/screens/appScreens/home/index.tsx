@@ -50,6 +50,10 @@ const HomeScreen: React.FC = () => {
     });
   };
 
+  const handleProductTap = (product: Product) => {
+    navigation.navigate('ProductDetails', { product });
+  };
+
   return (
     <Page isSafeAreaView>
       <View style={style.container}>
@@ -84,6 +88,7 @@ const HomeScreen: React.FC = () => {
               <ProductCard
                 product={item}
                 containerStyle={style.productContainer}
+                onPress={handleProductTap}
               />
             )}
           />
@@ -100,6 +105,7 @@ const HomeScreen: React.FC = () => {
               <ProductCard
                 product={item}
                 containerStyle={style.productContainer}
+                onPress={handleProductTap}
               />
             )}
           />
