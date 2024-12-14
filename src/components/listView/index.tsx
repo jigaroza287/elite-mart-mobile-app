@@ -8,12 +8,14 @@ import {
 
 interface HorizontalListProps<T> extends Omit<FlatListProps<T>, 'renderItem'> {
   renderItem: (item: T) => React.ReactElement | null;
+  containerStyle?: ViewStyle;
   contentContainerStyle?: ViewStyle;
 }
 
 const ListView = <T,>({
   data,
   renderItem,
+  containerStyle,
   contentContainerStyle,
   ...props
 }: HorizontalListProps<T>) => {
@@ -27,6 +29,7 @@ const ListView = <T,>({
       renderItem={renderListItem}
       keyExtractor={(_, index) => index.toString()}
       contentContainerStyle={contentContainerStyle}
+      style={containerStyle}
       {...props}
     />
   );

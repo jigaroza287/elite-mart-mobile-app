@@ -53,7 +53,9 @@ const ProductListScreen: React.FC<ProductListProps> = ({
   return (
     <Page isSafeAreaView scrollBehavior="none">
       <View style={style.container}>
-        <BackButton onPress={() => navigation.goBack()} />
+        <View style={style.header}>
+          <BackButton onPress={() => navigation.goBack()} />
+        </View>
         <Text style={style.pageTitle}>{productScreenTitle(filter)}</Text>
         {isSearchVisible && (
           <SearchBar placeholder="Type to search..." onSearch={handleSearch} />

@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Product } from '../../../redux/features/home/homeTypes';
 import { spacing } from '../../../theme';
 import style from './style';
+import { priceWithFormat } from '../../../utils/functionUtils';
 
 interface ProductCardProps {
   product: Product;
@@ -22,11 +23,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
   containerStyle,
   onPress,
 }) => {
+  const defaultVariant = product?.variants?.[0];
   return (
     <TouchableWithoutFeedback onPress={() => onPress(product)}>
       <View style={[style.container, containerStyle]}>
         <Image
-          source={{ uri: product.variants?.[0].images?.[0] }}
+          source={{ uri: defaultVariant?.images?.[0] }}
           style={style.image}
           resizeMode="cover"
         />
@@ -35,8 +37,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             {product.name}
           </Text>
           <Text style={style.productPrice} numberOfLines={1}>
-            {'$'}
-            {product.variants?.[0].price}
+            {priceWithFormat(defaultVariant?.price)}
           </Text>
         </View>
         <Icon

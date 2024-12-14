@@ -1,5 +1,4 @@
-import { DropdownItem } from '../components/dropdown';
-import constants, { ProductListFilters } from './constants';
+import { ProductListFilters } from './constants';
 
 const productScreenTitle = (filter?: ProductListFilters): string => {
   switch (filter) {
@@ -15,4 +14,8 @@ const productScreenTitle = (filter?: ProductListFilters): string => {
   }
 };
 
-export { productScreenTitle };
+const priceWithFormat = (price?: string | Number): string => {
+  return price ? `$${price}` : '';
+};
+
+export { priceWithFormat, productScreenTitle };

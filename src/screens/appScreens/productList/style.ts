@@ -13,6 +13,12 @@ export default StyleSheet.create({
     ...typography.title2Black,
     marginTop: spacing.small,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: spacing.small,
+  },
   productContainer: {
     flex: 1,
     margin: spacing.xSmall,

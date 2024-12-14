@@ -11,7 +11,7 @@ interface BackButtonProps {
 const BackButton: React.FC<BackButtonProps> = ({ onPress }) => {
   return (
     <TouchableOpacity style={style.container} onPress={onPress}>
-      <Icon name="chevron-back" size={spacing.medium} />
+      <Icon name="chevron-back" size={spacing.large} />
     </TouchableOpacity>
   );
 };

@@ -3,8 +3,7 @@ import { colors, spacing } from '../../theme';
 
 export default StyleSheet.create({
   container: {
-    alignSelf: 'flex-start',
-    padding: spacing.xMedium,
+    padding: spacing.medium,
     borderRadius: spacing.xLarge,
     backgroundColor: colors.lightGrey,
   },
