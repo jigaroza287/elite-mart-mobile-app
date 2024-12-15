@@ -17,7 +17,8 @@ export default StyleSheet.create({
     backgroundColor: colors.lightGrey,
   },
   dropdownText: {
-    ...typography.body2Bold,
+    ...typography.body1,
+    flex: 1,
     color: colors.dark,
     marginRight: spacing.tiny,
   },
@@ -38,5 +39,22 @@ export default StyleSheet.create({
   },
   itemText: {
     ...typography.body2,
+  },
+  selectedText: {
+    ...typography.body2Bold,
+  },
+  valueIconContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  chevronStyle: {
+    marginLeft: spacing.large,
+  },
+  colorContainer: {
+    width: spacing.medium,
+    height: spacing.medium,
+    borderRadius: spacing.xSmall,
   },
 });
