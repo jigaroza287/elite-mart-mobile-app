@@ -27,6 +27,7 @@ const typography = StyleSheet.create({
   body2Bold: {
     fontFamily: fontFamily.fontFamilyBlack,
     fontSize: fontSize.fontSizeRegular,
+    fontWeight: 'bold',
   },
   body2: {
     fontFamily: fontFamily.fontFamilySemiBold,
@@ -39,6 +40,7 @@ const typography = StyleSheet.create({
   title3Bold: {
     fontFamily: fontFamily.fontFamilyBold,
     fontSize: fontSize.fontSizeMedium,
+    fontWeight: 'bold',
   },
   title3: {
     fontFamily: fontFamily.fontFamilySemiBold,

@@ -23,6 +23,7 @@ export interface ProductVariant {
   productId: number;
   size: ProductSize;
   color: string;
+  colorCode: string;
   sku: string;
   price: number;
   discount: number;

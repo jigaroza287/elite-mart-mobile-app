@@ -35,4 +35,12 @@ export default StyleSheet.create({
     color: colors.primary,
     marginTop: spacing.medium,
   },
+  sizeDropdown: {
+    marginTop: spacing.xLarge,
+    marginRight: spacing.xLarge,
+  },
+  colorDropdown: {
+    marginTop: spacing.small,
+    marginRight: spacing.xLarge,
+  },
 });
