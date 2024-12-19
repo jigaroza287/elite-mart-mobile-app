@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { BackButton, ListView } from '../../../components';
-import Dropdown, { DropdownItem } from '../../../components/dropdown';
 import Page from '../../../components/page';
 import { HomeStackParamList } from '../../../navigation/AppNavigationTypes';
 import { ProductVariant } from '../../../redux/features/home/homeTypes';
@@ -22,20 +21,11 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
 }) => {
   const { product } = route.params || {};
   const defaultVariant: ProductVariant = product?.variants?.[0];
-  const sizes: DropdownItem[] = product?.variants.map(variant => ({
-    label: variant.size,
-    value: variant.size,
-  }));
-  const colors: DropdownItem[] = product?.variants.map(variant => ({
-    label: variant.color,
-    value: variant.colorCode,
-  }));
+  const sizes: string[] = product?.variants.map(variant => variant.size);
+  const colors: string[] = product?.variants.map(variant => variant.colorCode);
 
-  const [selectedSize, setSelectedSize] = useState<DropdownItem>(sizes?.[0]);
-  const [selectedColor, setSelectedColor] = useState<DropdownItem>(colors?.[0]);
-  const [quantity, setQuantity] = useState<number>(1);
-
-  const handleDropdownSelect = () => {};
+  const [selectedSize, setSelectedSize] = useState<string>();
+  const [selectedColor, setSelectedColor] = useState<string>();
 
   return (
     <Page isSafeAreaView>
@@ -47,7 +37,6 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
             <Icon name={'heart-outline'} size={spacing.large} color="black" />
           </TouchableOpacity>
         </View>
-
         {/* Product Images */}
         <ListView
           horizontal
@@ -66,31 +55,13 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
             />
           )}
         />
-
         {/* Product Details */}
-        <Text style={style.productName}>{product.name}</Text>
+        <Text style={style.productName}>{product.name.toUpperCase()}</Text>
+        <Text style={style.descriptionText}>{product.description}</Text>
+        <Text style={style.ratingsText}>{`${product.ratings} Ratings`}</Text>
         <Text style={style.price}>
           {priceWithFormat(defaultVariant?.price)}
         </Text>
-
-        {/* Size Dropdown */}
-        <Dropdown
-          items={sizes}
-          placeholder="Size"
-          fullWidth
-          containerStyle={style.sizeDropdown}
-          onSelect={handleDropdownSelect}
-        />
-
-        {/* Color Dropdown */}
-        <Dropdown
-          items={colors}
-          dropDownType="color"
-          placeholder="Color"
-          fullWidth
-          containerStyle={style.colorDropdown}
-          onSelect={handleDropdownSelect}
-        />
       </View>
     </Page>
   );

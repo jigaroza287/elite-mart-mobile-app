@@ -2,6 +2,11 @@ import { StyleSheet } from 'react-native';
 import { colors, spacing, typography } from '../../../theme';
 import constants from '../../../utils/constants';
 
+const bodyText = {
+  ...typography.small,
+  color: colors.grey,
+};
+
 export default StyleSheet.create({
   container: {
     paddingLeft: spacing.large,
@@ -33,14 +38,14 @@ export default StyleSheet.create({
   price: {
     ...typography.title3Bold,
     color: colors.primary,
-    marginTop: spacing.medium,
+    marginVertical: spacing.medium,
   },
-  sizeDropdown: {
-    marginTop: spacing.xLarge,
-    marginRight: spacing.xLarge,
+  descriptionText: {
+    ...bodyText,
+    marginTop: spacing.large,
   },
-  colorDropdown: {
-    marginTop: spacing.small,
-    marginRight: spacing.xLarge,
+  ratingsText: {
+    ...typography.title1,
+    marginTop: spacing.large,
   },
 });
