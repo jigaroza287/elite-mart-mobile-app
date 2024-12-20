@@ -1,51 +1,52 @@
 import { StyleSheet } from 'react-native';
 import { colors, spacing, typography } from '../../../theme';
 import constants from '../../../utils/constants';
+import normalize from 'react-native-normalize';
 
 const bodyText = {
-  ...typography.small,
-  color: colors.grey,
+  ...typography.body2,
+  color: colors.dark50,
 };
 
 export default StyleSheet.create({
-  container: {
-    paddingLeft: spacing.large,
-    marginBottom: spacing.large,
-  },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingHorizontal: spacing.xSmall,
   },
-  likeButton: {
-    padding: spacing.medium,
-    borderRadius: spacing.xLarge,
-    backgroundColor: colors.lightGrey,
-    marginRight: spacing.xMedium,
-  },
-  imagesListContainer: {
-    marginTop: spacing.large,
+  rightButtonsContainer: {
+    flexDirection: 'row',
   },
   image: {
-    width: constants.productCardWidth,
+    width: normalize(280),
     aspectRatio: constants.productCardImageRatio,
     marginRight: spacing.xSmall,
   },
+  detailsContainer: {
+    backgroundColor: colors.light60,
+    paddingBottom: spacing.large,
+  },
   productName: {
     ...typography.title3Bold,
-    marginTop: spacing.large,
-  },
-  price: {
-    ...typography.title3Bold,
-    color: colors.primary,
-    marginVertical: spacing.medium,
   },
   descriptionText: {
     ...bodyText,
-    marginTop: spacing.large,
+    marginTop: spacing.tiny,
   },
-  ratingsText: {
-    ...typography.title1,
-    marginTop: spacing.large,
+  ratingsContainer: {
+    marginTop: spacing.small,
+  },
+  price: {
+    ...typography.title3Bold,
+    marginTop: spacing.medium,
+  },
+  priceTax: {
+    ...typography.small,
+    color: colors.grey,
+    marginTop: spacing.tiny,
+  },
+  colorSection: {
+    marginTop: spacing.small,
   },
 });

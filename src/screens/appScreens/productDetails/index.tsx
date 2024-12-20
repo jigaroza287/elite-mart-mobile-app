@@ -1,14 +1,19 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { BackButton, ListView } from '../../../components';
+import { Image, Text, View } from 'react-native';
+import {
+  BackButton,
+  IconButton,
+  ListView,
+  SectionContainer,
+  StarRating,
+} from '../../../components';
 import Page from '../../../components/page';
 import { HomeStackParamList } from '../../../navigation/AppNavigationTypes';
 import { ProductVariant } from '../../../redux/features/home/homeTypes';
-import { spacing } from '../../../theme';
 import { priceWithFormat } from '../../../utils/functionUtils';
 import style from './style';
+import normalize from 'react-native-normalize';
 
 type ProductDetailsProps = NativeStackScreenProps<
   HomeStackParamList,
@@ -27,41 +32,53 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
   const [selectedSize, setSelectedSize] = useState<string>();
   const [selectedColor, setSelectedColor] = useState<string>();
 
+  const handleHeartButtonTap = () => {};
+  const handleBagButtonTap = () => {};
+
   return (
     <Page isSafeAreaView>
-      <View style={style.container}>
-        {/* Header */}
-        <View style={style.header}>
-          <BackButton onPress={() => navigation.goBack()} />
-          <TouchableOpacity style={style.likeButton}>
-            <Icon name={'heart-outline'} size={spacing.large} color="black" />
-          </TouchableOpacity>
+      {/* Header */}
+      <View style={style.header}>
+        <BackButton onPress={() => navigation.goBack()} />
+        <View style={style.rightButtonsContainer}>
+          <IconButton iconName="heart-outline" onPress={handleHeartButtonTap} />
+          <IconButton iconName="bag-outline" onPress={handleBagButtonTap} />
         </View>
-        {/* Product Images */}
-        <ListView
-          horizontal
-          data={[
-            ...defaultVariant?.images,
-            ...defaultVariant?.images,
-            ...defaultVariant.images,
-            ...defaultVariant.images,
-          ]}
-          containerStyle={style.imagesListContainer}
-          renderItem={(imageUrl: string) => (
-            <Image
-              source={{ uri: imageUrl }}
-              style={style.image}
-              resizeMode="cover"
-            />
-          )}
-        />
-        {/* Product Details */}
-        <Text style={style.productName}>{product.name.toUpperCase()}</Text>
-        <Text style={style.descriptionText}>{product.description}</Text>
-        <Text style={style.ratingsText}>{`${product.ratings} Ratings`}</Text>
-        <Text style={style.price}>
-          {priceWithFormat(defaultVariant?.price)}
-        </Text>
+      </View>
+
+      {/* Product Images */}
+      <ListView
+        horizontal
+        data={[
+          ...defaultVariant?.images,
+          ...defaultVariant?.images,
+          ...defaultVariant.images,
+          ...defaultVariant.images,
+        ]}
+        renderItem={(imageUrl: string) => (
+          <Image
+            source={{ uri: imageUrl }}
+            style={style.image}
+            resizeMode="cover"
+          />
+        )}
+      />
+
+      <View style={style.detailsContainer}>
+        {/* Product Basic Details */}
+        <SectionContainer>
+          <Text style={style.productName}>{product.name.toUpperCase()}</Text>
+          <Text style={style.descriptionText}>{product.description}</Text>
+          <StarRating
+            rating={product.ratings ?? 0}
+            style={style.ratingsContainer}
+            starSize={normalize(18)}
+          />
+          <Text style={style.price}>
+            {priceWithFormat(defaultVariant?.price)}
+          </Text>
+          <Text style={style.priceTax}>Price inclusive of all taxes.</Text>
+        </SectionContainer>
       </View>
     </Page>
   );
