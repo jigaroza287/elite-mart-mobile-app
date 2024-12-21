@@ -5,7 +5,7 @@ export default StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.lightGrey,
+    backgroundColor: colors.light60,
     borderRadius: spacing.large,
     borderColor: colors.grey,
     borderWidth: spacing.atom,

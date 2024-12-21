@@ -4,7 +4,7 @@ import constants from '../../../utils/constants';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: colors.lightGrey,
+    backgroundColor: colors.light60,
     borderRadius: spacing.xSmall,
     paddingBottom: spacing.medium,
   },

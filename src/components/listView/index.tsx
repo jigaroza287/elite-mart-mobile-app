@@ -6,7 +6,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-interface HorizontalListProps<T> extends Omit<FlatListProps<T>, 'renderItem'> {
+interface ListProps<T> extends Omit<FlatListProps<T>, 'renderItem'> {
   renderItem: (item: T) => React.ReactElement | null;
   containerStyle?: ViewStyle;
   contentContainerStyle?: ViewStyle;
@@ -18,7 +18,7 @@ const ListView = <T,>({
   containerStyle,
   contentContainerStyle,
   ...props
-}: HorizontalListProps<T>) => {
+}: ListProps<T>) => {
   const renderListItem: ListRenderItem<T> = ({ item }) => renderItem(item);
 
   return (

@@ -1,17 +1,18 @@
 import React from 'react';
 import { Dimensions, Image, Text, View } from 'react-native';
 import style from './style';
+import { spacing } from '../../../theme';
 
-interface SquareImageWithLabelProps {
+interface CategoryCardProps {
   imageUrl: string;
   label: string;
   size?: number;
 }
 
-const SquareImageWithLabel: React.FC<SquareImageWithLabelProps> = ({
+const CategoryCard: React.FC<CategoryCardProps> = ({
   imageUrl,
   label,
-  size = Dimensions.get('window').width / 6,
+  size = spacing.huge,
 }) => {
   return (
     <View style={[style.container, { width: size }]}>
@@ -27,4 +28,4 @@ const SquareImageWithLabel: React.FC<SquareImageWithLabelProps> = ({
   );
 };
 
-export default SquareImageWithLabel;
+export default CategoryCard;

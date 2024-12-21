@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import normalize from 'react-native-normalize';
-import { colors, spacing, typography } from '../../../theme';
+import { spacing, typography } from '../../../theme';
+
 const imageSize = Dimensions.get('window').width / 6;
 
 export default StyleSheet.create({
@@ -10,7 +11,6 @@ export default StyleSheet.create({
   },
   image: {
     borderRadius: normalize(imageSize / 2),
-    backgroundColor: colors.lightGrey,
   },
   label: {
     ...typography.tiny,

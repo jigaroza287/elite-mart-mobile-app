@@ -23,6 +23,6 @@ export default StyleSheet.create({
     flex: 1,
     margin: spacing.xSmall,
     marginBottom: spacing.medium,
-    backgroundColor: colors.lightGrey,
+    backgroundColor: colors.light60,
   },
 });
