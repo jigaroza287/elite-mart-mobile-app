@@ -1,4 +1,4 @@
-import { Platform, StyleSheet, ViewStyle } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { colors, spacing, typography } from '../../../theme';
 
 export default StyleSheet.create({

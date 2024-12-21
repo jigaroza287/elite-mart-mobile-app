@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { colors, spacing, typography } from '../../../theme';
-import constants from '../../../utils/constants';
 import normalize from 'react-native-normalize';
+import { colors, spacing, typography } from '../../../theme';
 
 const bodyText = {
   ...typography.body2,
@@ -20,7 +19,7 @@ export default StyleSheet.create({
   },
   image: {
     width: normalize(280),
-    aspectRatio: constants.productCardImageRatio,
+    height: normalize(400),
     marginRight: spacing.xSmall,
   },
   detailsContainer: {
@@ -48,5 +47,13 @@ export default StyleSheet.create({
   },
   colorSection: {
     marginTop: spacing.small,
+  },
+  colorContainer: {
+    marginRight: spacing.small,
+  },
+  sectionTitle: {
+    ...typography.body2Bold,
+    color: colors.dark,
+    marginBottom: spacing.small,
   },
 });

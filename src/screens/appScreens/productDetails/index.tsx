@@ -1,24 +1,41 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Text, View } from 'react-native';
+import normalize from 'react-native-normalize';
 import {
   BackButton,
+  ColorCard,
   IconButton,
   ListView,
   SectionContainer,
+  SizeCard,
   StarRating,
 } from '../../../components';
 import Page from '../../../components/page';
 import { HomeStackParamList } from '../../../navigation/AppNavigationTypes';
 import { ProductVariant } from '../../../redux/features/home/homeTypes';
+import { spacing } from '../../../theme';
+import constants from '../../../utils/constants';
 import { priceWithFormat } from '../../../utils/functionUtils';
 import style from './style';
-import normalize from 'react-native-normalize';
 
 type ProductDetailsProps = NativeStackScreenProps<
   HomeStackParamList,
   'ProductDetails'
 >;
+
+type ProductSize = {
+  size: string;
+  disabled: boolean;
+};
+
+const sortSizes = (sizes: string[]): string[] => {
+  return sizes.sort((a, b) => {
+    const indexA = constants.sizeOrderMap.get(a) ?? Infinity;
+    const indexB = constants.sizeOrderMap.get(b) ?? Infinity;
+    return indexA - indexB;
+  });
+};
 
 const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
   navigation,
@@ -26,14 +43,48 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
 }) => {
   const { product } = route.params || {};
   const defaultVariant: ProductVariant = product?.variants?.[0];
-  const sizes: string[] = product?.variants.map(variant => variant.size);
-  const colors: string[] = product?.variants.map(variant => variant.colorCode);
+  const colors: string[] = Array.from(
+    new Set(product?.variants.map(variant => variant.colorCode)),
+  );
+  const uniqSizes: string[] = sortSizes(
+    Array.from(new Set(product?.variants.map(variant => variant.size))),
+  );
 
-  const [selectedSize, setSelectedSize] = useState<string>();
   const [selectedColor, setSelectedColor] = useState<string>();
+  const [selectedSize, setSelectedSize] = useState<string>();
+  const [availableSizes, setAvailableSizes] = useState<ProductSize[]>([]);
+
+  useEffect(() => {
+    setSelectedColor(colors?.[0]);
+  }, []);
+
+  useEffect(() => {
+    setSelectedSize(undefined);
+    let availableSizesForColor: string[] = product?.variants
+      .filter(variant => variant.colorCode === selectedColor)
+      .map(variant => variant.size);
+
+    setAvailableSizes(
+      uniqSizes.map(size => ({
+        size: size,
+        disabled: !availableSizesForColor.includes(size),
+      })),
+    );
+  }, [selectedColor]);
 
   const handleHeartButtonTap = () => {};
   const handleBagButtonTap = () => {};
+
+  const colorForColorCode = (): string | undefined => {
+    const selectedColorInVariant = product?.variants.find(
+      variant => variant.colorCode === selectedColor,
+    )?.color;
+    return selectedColorInVariant ? `(${selectedColorInVariant})` : undefined;
+  };
+
+  const selectedSizeValue = (): string | undefined => {
+    return selectedSize ? `(${selectedSize})` : undefined;
+  };
 
   return (
     <Page isSafeAreaView>
@@ -78,6 +129,42 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
             {priceWithFormat(defaultVariant?.price)}
           </Text>
           <Text style={style.priceTax}>Price inclusive of all taxes.</Text>
+        </SectionContainer>
+
+        {/* Product Colors */}
+        <SectionContainer style={style.colorSection}>
+          <Text style={style.sectionTitle}>Color {colorForColorCode()}</Text>
+          <ListView
+            horizontal
+            data={colors}
+            renderItem={(item: string) => (
+              <ColorCard
+                color={item}
+                style={style.colorContainer}
+                size={spacing.xLarge}
+                onSelect={setSelectedColor}
+                isSelected={item === selectedColor}
+              />
+            )}
+          />
+        </SectionContainer>
+
+        {/* Product Sizes */}
+        <SectionContainer style={style.colorSection}>
+          <Text style={style.sectionTitle}>Size {selectedSizeValue()}</Text>
+          <ListView<ProductSize>
+            horizontal
+            data={availableSizes}
+            renderItem={(item: ProductSize) => (
+              <SizeCard
+                style={style.colorContainer}
+                size={item.size}
+                onSelect={setSelectedSize}
+                isSelected={item.size === selectedSize}
+                disabled={item.disabled}
+              />
+            )}
+          />
         </SectionContainer>
       </View>
     </Page>
