@@ -6,6 +6,7 @@ import ColorCard from './cards/colorCard';
 import ProductCard from './cards/productCard';
 import HomeSection from './homeSection';
 import ListView from './listView';
+import LoadingOverlay from './loadingOverlay';
 import SearchBar from './searchBar';
 import SectionContainer from './sectionContainer';
 import SizeCard from './cards/sizeCard';
@@ -19,6 +20,7 @@ export {
   ColorCard,
   HomeSection,
   ListView,
+  LoadingOverlay,
   ProductCard,
   SearchBar,
   SectionContainer,
