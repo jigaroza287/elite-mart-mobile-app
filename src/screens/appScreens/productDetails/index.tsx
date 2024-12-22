@@ -1,12 +1,16 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { Image, Text, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import normalize from 'react-native-normalize';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {
   BackButton,
+  BulletList,
   ColorCard,
   IconButton,
+  ImageGallery,
   ListView,
+  PinCodeChecker,
   SectionContainer,
   SizeCard,
   StarRating,
@@ -14,7 +18,9 @@ import {
 import Page from '../../../components/page';
 import { HomeStackParamList } from '../../../navigation/AppNavigationTypes';
 import { ProductVariant } from '../../../redux/features/home/homeTypes';
-import { spacing } from '../../../theme';
+import usePinCodeCheck from '../../../redux/features/pinCodeCheck/usePinCodeCheck';
+import { useLoadingOverlay } from '../../../redux/hooks/useLoadingOverlay';
+import { colors, spacing } from '../../../theme';
 import constants from '../../../utils/constants';
 import { priceWithFormat } from '../../../utils/functionUtils';
 import style from './style';
@@ -42,8 +48,17 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
   route,
 }) => {
   const { product } = route.params || {};
+  const { show, hide } = useLoadingOverlay();
+
+  const {
+    loading,
+    error: pinCodeCheckError,
+    pinCodeData,
+    validatePinCode,
+  } = usePinCodeCheck();
+
   const defaultVariant: ProductVariant = product?.variants?.[0];
-  const colors: string[] = Array.from(
+  const productColors: string[] = Array.from(
     new Set(product?.variants.map(variant => variant.colorCode)),
   );
   const uniqSizes: string[] = sortSizes(
@@ -55,7 +70,7 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
   const [availableSizes, setAvailableSizes] = useState<ProductSize[]>([]);
 
   useEffect(() => {
-    setSelectedColor(colors?.[0]);
+    setSelectedColor(productColors?.[0]);
   }, []);
 
   useEffect(() => {
@@ -72,8 +87,17 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
     );
   }, [selectedColor]);
 
+  useEffect(() => {
+    loading ? show() : hide();
+  }, [loading, pinCodeData, pinCodeCheckError]);
+
   const handleHeartButtonTap = () => {};
   const handleBagButtonTap = () => {};
+  const handleReturnPolicyTap = () => {};
+
+  const handleCheckDelivery = (pinCode: string) => {
+    validatePinCode({ pinCode });
+  };
 
   const colorForColorCode = (): string | undefined => {
     const selectedColorInVariant = product?.variants.find(
@@ -87,87 +111,139 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
   };
 
   return (
-    <Page isSafeAreaView>
-      {/* Header */}
-      <View style={style.header}>
-        <BackButton onPress={() => navigation.goBack()} />
-        <View style={style.rightButtonsContainer}>
-          <IconButton iconName="heart-outline" onPress={handleHeartButtonTap} />
-          <IconButton iconName="bag-outline" onPress={handleBagButtonTap} />
+    <>
+      <SafeAreaView>
+        {/* Header */}
+        <View style={style.header}>
+          <BackButton onPress={() => navigation.goBack()} />
+          <View style={style.rightButtonsContainer}>
+            <IconButton
+              iconName="heart-outline"
+              onPress={handleHeartButtonTap}
+            />
+            <IconButton iconName="bag-outline" onPress={handleBagButtonTap} />
+          </View>
         </View>
-      </View>
+      </SafeAreaView>
+      <Page>
+        {/* Product Images */}
+        <ImageGallery
+          images={[
+            ...defaultVariant?.images,
+            ...defaultVariant?.images,
+            ...defaultVariant.images,
+            ...defaultVariant.images,
+          ]}
+        />
 
-      {/* Product Images */}
-      <ListView
-        horizontal
-        data={[
-          ...defaultVariant?.images,
-          ...defaultVariant?.images,
-          ...defaultVariant.images,
-          ...defaultVariant.images,
-        ]}
-        renderItem={(imageUrl: string) => (
-          <Image
-            source={{ uri: imageUrl }}
-            style={style.image}
-            resizeMode="cover"
-          />
-        )}
-      />
+        <View style={style.detailsContainer}>
+          {/* Product Basic Details */}
+          <SectionContainer>
+            <Text style={style.productName}>{product.name.toUpperCase()}</Text>
+            <Text style={style.descriptionText}>{product.description}</Text>
+            <StarRating
+              rating={product.ratings ?? 0}
+              style={style.ratingsContainer}
+              starSize={normalize(18)}
+            />
+            <Text style={style.price}>
+              {priceWithFormat(defaultVariant?.price)}
+            </Text>
+            <Text style={style.priceTax}>Price inclusive of all taxes.</Text>
+          </SectionContainer>
 
-      <View style={style.detailsContainer}>
-        {/* Product Basic Details */}
-        <SectionContainer>
-          <Text style={style.productName}>{product.name.toUpperCase()}</Text>
-          <Text style={style.descriptionText}>{product.description}</Text>
-          <StarRating
-            rating={product.ratings ?? 0}
-            style={style.ratingsContainer}
-            starSize={normalize(18)}
-          />
-          <Text style={style.price}>
-            {priceWithFormat(defaultVariant?.price)}
-          </Text>
-          <Text style={style.priceTax}>Price inclusive of all taxes.</Text>
-        </SectionContainer>
+          {/* Product Colors */}
+          <SectionContainer style={style.colorSection}>
+            <Text style={style.sectionTitle}>Color {colorForColorCode()}</Text>
+            <ListView
+              horizontal
+              data={productColors}
+              renderItem={(item: string) => (
+                <ColorCard
+                  color={item}
+                  style={style.colorContainer}
+                  size={spacing.xLarge}
+                  onSelect={setSelectedColor}
+                  isSelected={item === selectedColor}
+                />
+              )}
+            />
+          </SectionContainer>
 
-        {/* Product Colors */}
-        <SectionContainer style={style.colorSection}>
-          <Text style={style.sectionTitle}>Color {colorForColorCode()}</Text>
-          <ListView
-            horizontal
-            data={colors}
-            renderItem={(item: string) => (
-              <ColorCard
-                color={item}
-                style={style.colorContainer}
-                size={spacing.xLarge}
-                onSelect={setSelectedColor}
-                isSelected={item === selectedColor}
-              />
-            )}
-          />
-        </SectionContainer>
+          {/* Product Sizes */}
+          <SectionContainer style={style.colorSection}>
+            <Text style={style.sectionTitle}>Size {selectedSizeValue()}</Text>
+            <ListView<ProductSize>
+              horizontal
+              data={availableSizes}
+              renderItem={(item: ProductSize) => (
+                <SizeCard
+                  style={style.colorContainer}
+                  size={item.size}
+                  onSelect={setSelectedSize}
+                  isSelected={item.size === selectedSize}
+                  disabled={item.disabled}
+                />
+              )}
+            />
+          </SectionContainer>
 
-        {/* Product Sizes */}
-        <SectionContainer style={style.colorSection}>
-          <Text style={style.sectionTitle}>Size {selectedSizeValue()}</Text>
-          <ListView<ProductSize>
-            horizontal
-            data={availableSizes}
-            renderItem={(item: ProductSize) => (
-              <SizeCard
-                style={style.colorContainer}
-                size={item.size}
-                onSelect={setSelectedSize}
-                isSelected={item.size === selectedSize}
-                disabled={item.disabled}
-              />
-            )}
-          />
-        </SectionContainer>
-      </View>
-    </Page>
+          {/* Delivery and Return Details */}
+          <SectionContainer style={style.colorSection}>
+            <Text style={style.sectionTitle}>Delivery and Return Details</Text>
+            <PinCodeChecker
+              onCheckDelivery={handleCheckDelivery}
+              error={pinCodeCheckError}
+            />
+
+            {/* Delivery Details */}
+            <View style={style.deliveryDetailsContainer}>
+              <View style={style.iconContainer}>
+                <Icon name="return-up-back-outline" size={spacing.xMedium} />
+                <Icon
+                  name="checkmark-circle-sharp"
+                  size={spacing.medium}
+                  color={colors.green}
+                  style={style.greenCheckIcon}
+                />
+              </View>
+              <View>
+                <Text style={style.deliveryText}>
+                  7 day Return and Exchange
+                </Text>
+                <Text
+                  style={style.returnPolicyText}
+                  onPress={handleReturnPolicyTap}>
+                  Return Policies
+                </Text>
+              </View>
+            </View>
+
+            {/* COD Availability */}
+            <View style={style.deliveryDetailsContainer}>
+              <View style={style.iconContainer}>
+                <Icon name="cash-outline" size={spacing.xMedium} />
+                <Icon
+                  name="checkmark-circle-sharp"
+                  size={spacing.medium}
+                  color={colors.green}
+                  style={style.greenCheckIcon}
+                />
+              </View>
+              <Text style={style.deliveryText}>
+                Check COD availability at checkout
+              </Text>
+            </View>
+          </SectionContainer>
+
+          {/* Product Details */}
+          <SectionContainer style={style.colorSection}>
+            <Text style={style.sectionTitle}>Product Details</Text>
+            <BulletList items={product.details} />
+          </SectionContainer>
+        </View>
+      </Page>
+    </>
   );
 };
 

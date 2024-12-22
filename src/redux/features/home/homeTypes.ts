@@ -11,6 +11,7 @@ export interface Product {
   categoryId: number;
   name: string;
   description: string;
+  details: string[];
   demographic: Demographics;
   ratings?: number;
   createdAt: Date;
