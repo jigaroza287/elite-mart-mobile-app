@@ -19,8 +19,6 @@ const ReusableBottomSheet = forwardRef<
 
   useImperativeHandle(ref, () => ({
     openBottomSheet: () => {
-      console.log('bottomSheetRef.current: \n');
-      console.log(bottomSheetRef.current);
       bottomSheetRef.current?.expand();
     },
     closeBottomSheet: () => {
