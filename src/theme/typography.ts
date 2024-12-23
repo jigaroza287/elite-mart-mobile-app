@@ -32,6 +32,7 @@ const typography = StyleSheet.create({
   body2: {
     fontFamily: fontFamily.fontFamilySemiBold,
     fontSize: fontSize.fontSizeRegular,
+    fontWeight: 'semibold',
   },
   body1: {
     fontFamily: fontFamily.fontFamilyMedium,

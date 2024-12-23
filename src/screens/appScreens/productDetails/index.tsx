@@ -2,7 +2,6 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
 import normalize from 'react-native-normalize';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {
   BackButton,
   BulletList,
@@ -20,9 +19,10 @@ import { HomeStackParamList } from '../../../navigation/AppNavigationTypes';
 import { ProductVariant } from '../../../redux/features/home/homeTypes';
 import usePinCodeCheck from '../../../redux/features/pinCodeCheck/usePinCodeCheck';
 import { useLoadingOverlay } from '../../../redux/hooks/useLoadingOverlay';
-import { colors, spacing } from '../../../theme';
+import { spacing } from '../../../theme';
 import constants from '../../../utils/constants';
 import { priceWithFormat } from '../../../utils/functionUtils';
+import IconDescription from './components/IconDescription';
 import style from './style';
 
 type ProductDetailsProps = NativeStackScreenProps<
@@ -68,6 +68,8 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
   const [selectedColor, setSelectedColor] = useState<string>();
   const [selectedSize, setSelectedSize] = useState<string>();
   const [availableSizes, setAvailableSizes] = useState<ProductSize[]>([]);
+  const [showDeliveryDetails, setShowDeliveryDetails] =
+    useState<boolean>(false);
 
   useEffect(() => {
     setSelectedColor(productColors?.[0]);
@@ -89,6 +91,11 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
 
   useEffect(() => {
     loading ? show() : hide();
+    if (pinCodeCheckError) {
+      setShowDeliveryDetails(false);
+    } else if (!loading && pinCodeData && pinCodeData.isValid) {
+      setShowDeliveryDetails(true);
+    }
   }, [loading, pinCodeData, pinCodeCheckError]);
 
   const handleHeartButtonTap = () => {};
@@ -196,44 +203,21 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
               error={pinCodeCheckError}
             />
 
-            {/* Delivery Details */}
-            <View style={style.deliveryDetailsContainer}>
-              <View style={style.iconContainer}>
-                <Icon name="return-up-back-outline" size={spacing.xMedium} />
-                <Icon
-                  name="checkmark-circle-sharp"
-                  size={spacing.medium}
-                  color={colors.green}
-                  style={style.greenCheckIcon}
-                />
-              </View>
-              <View>
-                <Text style={style.deliveryText}>
-                  7 day Return and Exchange
-                </Text>
-                <Text
-                  style={style.returnPolicyText}
-                  onPress={handleReturnPolicyTap}>
-                  Return Policies
-                </Text>
-              </View>
-            </View>
+            {/* Return & Exchange */}
+            <IconDescription
+              iconName="return-up-back-outline"
+              descriptionText="7 day Return and Exchange"
+              linkButtonText="Return Policies"
+              onPressLink={handleReturnPolicyTap}
+              style={style.deliveryDetailsContainer}
+            />
 
             {/* COD Availability */}
-            <View style={style.deliveryDetailsContainer}>
-              <View style={style.iconContainer}>
-                <Icon name="cash-outline" size={spacing.xMedium} />
-                <Icon
-                  name="checkmark-circle-sharp"
-                  size={spacing.medium}
-                  color={colors.green}
-                  style={style.greenCheckIcon}
-                />
-              </View>
-              <Text style={style.deliveryText}>
-                Check COD availability at checkout
-              </Text>
-            </View>
+            <IconDescription
+              iconName="cash-outline"
+              descriptionText="Check COD availability at checkout"
+              style={style.deliveryDetailsContainer}
+            />
           </SectionContainer>
 
           {/* Product Details */}

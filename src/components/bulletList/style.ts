@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { spacing } from '../../theme';
+import { spacing, typography } from '../../theme';
 
 export default StyleSheet.create({
   container: {
@@ -11,11 +11,10 @@ export default StyleSheet.create({
     marginVertical: spacing.tiny,
   },
   bullet: {
-    fontSize: spacing.medium,
+    ...typography.body1,
     marginRight: spacing.xSmall,
   },
   text: {
-    fontSize: spacing.medium,
-    flex: 1,
+    ...typography.body1,
   },
 });

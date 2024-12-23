@@ -56,29 +56,6 @@ export default StyleSheet.create({
     marginBottom: spacing.small,
   },
   deliveryDetailsContainer: {
-    flexDirection: 'row',
     marginTop: spacing.small,
-    alignItems: 'center',
-  },
-  deliveryText: {
-    ...typography.body2,
-    marginBottom: spacing.tiny,
-  },
-  iconContainer: {
-    marginRight: spacing.small,
-    padding: spacing.tiny,
-    borderRadius: spacing.medium,
-    borderWidth: spacing.atom,
-  },
-  returnPolicyText: {
-    ...typography.small,
-    color: colors.blue,
-  },
-  greenCheckIcon: {
-    position: 'absolute',
-    bottom: -spacing.tiny,
-    right: -spacing.tiny,
-    backgroundColor: colors.light,
-    borderRadius: spacing.xSmall,
   },
 });
