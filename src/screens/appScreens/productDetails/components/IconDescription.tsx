@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, ViewProps } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { StyleSheet, Text, TextStyle, View, ViewProps } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { colors, spacing, typography } from '../../../../theme';
 
 interface IconDescriptionProps extends ViewProps {
   iconName: string;
   descriptionText: string;
+  descriptionTextStyle?: TextStyle;
   linkButtonText?: string;
   onPressLink?: () => void;
   showCheckIcon?: boolean;
@@ -14,6 +15,7 @@ interface IconDescriptionProps extends ViewProps {
 const IconDescription: React.FC<IconDescriptionProps> = ({
   iconName,
   descriptionText,
+  descriptionTextStyle,
   linkButtonText,
   onPressLink,
   showCheckIcon = true,
@@ -25,7 +27,7 @@ const IconDescription: React.FC<IconDescriptionProps> = ({
         <Icon name={iconName} size={spacing.xMedium} />
         {showCheckIcon && (
           <Icon
-            name="checkmark-circle-sharp"
+            name="check-circle"
             size={spacing.medium}
             color={colors.green}
             style={styles.greenCheckIcon}
@@ -33,7 +35,9 @@ const IconDescription: React.FC<IconDescriptionProps> = ({
         )}
       </View>
       <View>
-        <Text style={styles.descriptionTextStyle}>{descriptionText}</Text>
+        <Text style={[styles.descriptionTextStyle, descriptionTextStyle]}>
+          {descriptionText}
+        </Text>
         {linkButtonText && (
           <Text style={styles.linkButtonTextStyle} onPress={onPressLink}>
             {linkButtonText}

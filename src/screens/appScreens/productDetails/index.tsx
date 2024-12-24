@@ -93,7 +93,7 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
     loading ? show() : hide();
     if (pinCodeCheckError) {
       setShowDeliveryDetails(false);
-    } else if (!loading && pinCodeData && pinCodeData.isValid) {
+    } else if (!loading && pinCodeData && pinCodeData.success) {
       setShowDeliveryDetails(true);
     }
   }, [loading, pinCodeData, pinCodeCheckError]);
@@ -160,7 +160,7 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
           </SectionContainer>
 
           {/* Product Colors */}
-          <SectionContainer style={style.colorSection}>
+          <SectionContainer style={style.sectionContainer}>
             <Text style={style.sectionTitle}>Color {colorForColorCode()}</Text>
             <ListView
               horizontal
@@ -178,7 +178,7 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
           </SectionContainer>
 
           {/* Product Sizes */}
-          <SectionContainer style={style.colorSection}>
+          <SectionContainer style={style.sectionContainer}>
             <Text style={style.sectionTitle}>Size {selectedSizeValue()}</Text>
             <ListView<ProductSize>
               horizontal
@@ -196,16 +196,25 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
           </SectionContainer>
 
           {/* Delivery and Return Details */}
-          <SectionContainer style={style.colorSection}>
+          <SectionContainer style={style.sectionContainer}>
             <Text style={style.sectionTitle}>Delivery and Return Details</Text>
             <PinCodeChecker
               onCheckDelivery={handleCheckDelivery}
               error={pinCodeCheckError}
             />
 
+            {/* Delivery days */}
+            {showDeliveryDetails && (
+              <IconDescription
+                iconName="truck-delivery-outline"
+                descriptionText="Expected delivery in 3-5 days"
+                style={style.deliveryDetailsContainer}
+              />
+            )}
+
             {/* Return & Exchange */}
             <IconDescription
-              iconName="return-up-back-outline"
+              iconName="keyboard-return"
               descriptionText="7 day Return and Exchange"
               linkButtonText="Return Policies"
               onPressLink={handleReturnPolicyTap}
@@ -214,14 +223,14 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
 
             {/* COD Availability */}
             <IconDescription
-              iconName="cash-outline"
+              iconName="cash"
               descriptionText="Check COD availability at checkout"
               style={style.deliveryDetailsContainer}
             />
           </SectionContainer>
 
           {/* Product Details */}
-          <SectionContainer style={style.colorSection}>
+          <SectionContainer style={style.sectionContainer}>
             <Text style={style.sectionTitle}>Product Details</Text>
             <BulletList items={product.details} />
           </SectionContainer>

@@ -44,7 +44,7 @@ export default StyleSheet.create({
     color: colors.grey,
     marginTop: spacing.tiny,
   },
-  colorSection: {
+  sectionContainer: {
     marginTop: spacing.small,
   },
   colorContainer: {
@@ -56,6 +56,6 @@ export default StyleSheet.create({
     marginBottom: spacing.small,
   },
   deliveryDetailsContainer: {
-    marginTop: spacing.small,
+    marginTop: spacing.medium,
   },
 });

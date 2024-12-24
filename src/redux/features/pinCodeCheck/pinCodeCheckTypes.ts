@@ -3,7 +3,7 @@ export interface PinCodeCheckRequest {
 }
 
 export interface PinCodeCheckResponse {
-  isValid: boolean;
+  success: boolean;
   message: string;
 }
 
