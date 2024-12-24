@@ -7,11 +7,13 @@ Elite Mart is a feature-rich React Native-based mobile application designed to d
 ## **Features**
 
 ### General
+
 - **Cross-Platform Compatibility**: Fully functional on both iOS and Android.
 - **State Management**: Powered by Redux Toolkit for centralized state handling.
 - **Scalable Architecture**: Clean and modular structure, making the app easy to extend and maintain.
 
 ### Core Functionalities
+
 - **Home Page**:
   - Displays categories, top-selling products, and new arrivals in an optimized layout.
 - **Product Listing Page**:
@@ -25,6 +27,7 @@ Elite Mart is a feature-rich React Native-based mobile application designed to d
   - Enables adding or removing products from the wishlist.
 
 ### Advanced Features
+
 - **Global Loading Overlay**:
   - A reusable, singleton-style, full-screen loading indicator.
 - **FlatList Optimization**:
@@ -35,10 +38,12 @@ Elite Mart is a feature-rich React Native-based mobile application designed to d
 ## **Technologies Used**
 
 ### Core
+
 - **React Native**: Framework for building cross-platform mobile applications.
 - **TypeScript**: Static typing for improved code quality and maintainability.
 
 ### Libraries
+
 - **Navigation**:
   - `@react-navigation/native`
   - `@react-navigation/stack`
@@ -58,6 +63,7 @@ Elite Mart is a feature-rich React Native-based mobile application designed to d
   - `react-native-keyboard-aware-scroll-view` for better input handling.
 
 ### Development
+
 - **Testing**: `jest` for unit testing.
 - **Code Quality**: `eslint` and `prettier` for linting and formatting.
 
@@ -66,6 +72,7 @@ Elite Mart is a feature-rich React Native-based mobile application designed to d
 ## **Installation**
 
 ### Prerequisites
+
 - **Node.js**: >= 18.x
 - **React Native CLI**: Installed globally
 - **Yarn**: >= 3.6.4
@@ -73,29 +80,36 @@ Elite Mart is a feature-rich React Native-based mobile application designed to d
 - **Android Studio**: For Android development
 
 ### Steps
+
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/jigaroza287/elite-mart-mobile-app.git
    cd elite-mart-mobile-app
    ```
 
 2. Install dependencies:
+
    ```bash
    yarn install
    ```
 
 3. Start Metro bundler:
+
    ```bash
    yarn start
    ```
 
 4. Run the app:
+
    - For iOS
+
    ```bash
    yarn ios
    ```
 
    - For Android
+
    ```bash
    yarn android
    ```
@@ -105,6 +119,7 @@ Elite Mart is a feature-rich React Native-based mobile application designed to d
 To streamline API interactions and manage authentication tokens and error responses globally, this project uses Axios interceptors.
 
 ### **Request Interceptor**
+
 The request interceptor adds an authentication token (if available) to every outgoing API request, ensuring secure communication.
 
 ```typescript
@@ -118,6 +133,7 @@ axiosInstance.interceptors.request.use(async config => {
 ```
 
 ### **Response Interceptor**
+
 The response interceptor processes API responses and handles errors consistently. It extracts meaningful error messages for various scenarios like bad requests, unauthorized access, and server issues.
 
 ```typescript
@@ -149,6 +165,7 @@ axiosInstance.interceptors.response.use(
 ```
 
 ### **Why This Implementation?**
+
 - **Centralized Token Management:** Ensures all API requests automatically include the authentication token.
 - **Consistent Error Handling:** Provides a unified way to manage errors, making debugging and user feedback easier.
 - **Security:** By dynamically injecting the token, sensitive data is kept secure.
@@ -159,23 +176,24 @@ This approach is highly scalable and aligns with industry standards for handling
 
 ### Base URL
 
-  ```arduino
-  http://localhost:3000
-  ```
-
+```arduino
+http://localhost:3000
+```
 
 ### Key APIs
-| Endpoint                 | Method | Description                      |
-|--------------------------|--------|----------------------------------|
-| `/home`                  | GET    | Fetch products for Home page    |
-| `/products`              | GET    | Fetch all products              |
-| `/products/:id`          | GET    | Fetch product details           |
-| `/categories`            | GET    | Fetch product categories        |
-| `/validate-pin-code`     | GET    | Validate delivery availability  |
-| `/users/register`        | POST   | User registration (Signup)      |
-| `/users/login`           | POST   | User login (Login)              |
+
+| Endpoint             | Method | Description                    |
+| -------------------- | ------ | ------------------------------ |
+| `/home`              | GET    | Fetch products for Home page   |
+| `/products`          | GET    | Fetch all products             |
+| `/products/:id`      | GET    | Fetch product details          |
+| `/categories`        | GET    | Fetch product categories       |
+| `/validate-pin-code` | GET    | Validate delivery availability |
+| `/users/register`    | POST   | User registration (Signup)     |
+| `/users/login`       | POST   | User login (Login)             |
 
 ### Backend Implementation
+
 - The backend for this application is implemented in Node.js with Sequelize ORM.
 - Find the backend project and setup instructions here:  
   [Elite Mart Backend](https://github.com/jigaroza287/elite-mart-backend.git)
@@ -186,6 +204,7 @@ This approach is highly scalable and aligns with industry standards for handling
 
 We welcome contributions to make Elite Mart better!  
 To contribute:
+
 1. Fork the repository.
 2. Create a new branch (`feature/your-feature-name`).
 3. Commit and push your changes.
@@ -201,5 +220,6 @@ This project is licensed under the MIT License.
 
 ## **Contact**
 
-For questions or suggestions, reach out to us at:  
+For questions or suggestions, reach out to us at:
+
 - **GitHub Issues**: [Elite Mart Issues](https://github.com/jigaroza287/elite-mart-mobile-app/issues)
