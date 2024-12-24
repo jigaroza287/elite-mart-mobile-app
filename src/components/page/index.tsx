@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { SafeAreaView, ScrollView, View } from 'react-native';
+import { RefreshControl, SafeAreaView, ScrollView, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { colors } from '../../theme';
 import PageHeader, { PageHeaderProps } from '../pageHeader';
@@ -13,6 +13,9 @@ export interface PageProps extends PageHeaderProps {
   scrollBehavior?: ScrollBehavior;
   showHeader?: boolean;
   safeAreaColor?: string;
+  enablePullToRefresh?: boolean;
+  onRefresh?: () => Promise<void> | void;
+  refreshing?: boolean;
 }
 
 const Page: React.FC<PageProps> = ({
@@ -21,8 +24,15 @@ const Page: React.FC<PageProps> = ({
   scrollBehavior = 'scroll',
   showHeader = false,
   safeAreaColor = colors.light,
+  enablePullToRefresh = false,
+  onRefresh,
+  refreshing = false,
   ...headerProps
 }: PageProps) => {
+  const refreshControl = enablePullToRefresh ? (
+    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+  ) : undefined;
+
   const container = useMemo(() => {
     if (scrollBehavior === 'scroll') {
       return (
@@ -31,7 +41,8 @@ const Page: React.FC<PageProps> = ({
           alwaysBounceHorizontal={false}
           alwaysBounceVertical={false}
           showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}>
+          showsVerticalScrollIndicator={false}
+          refreshControl={refreshControl}>
           {children}
         </ScrollView>
       );
@@ -40,7 +51,8 @@ const Page: React.FC<PageProps> = ({
         <KeyboardAwareScrollView
           bounces={false}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={style.contentContainer}>
+          contentContainerStyle={style.contentContainer}
+          refreshControl={refreshControl}>
           {children}
         </KeyboardAwareScrollView>
       );
