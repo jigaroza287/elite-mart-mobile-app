@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import {
   BackButton,
@@ -33,6 +33,10 @@ const ProductListScreen: React.FC<ProductListProps> = ({
   };
 
   useEffect(() => {
+    fetchProducts(productListRequestParams);
+  }, []);
+
+  const handleRefresh = useCallback(async () => {
     fetchProducts(productListRequestParams);
   }, []);
 
@@ -76,6 +80,9 @@ const ProductListScreen: React.FC<ProductListProps> = ({
           ListFooterComponent={
             loading ? <ActivityIndicator size="large" /> : null
           }
+          enablePullToRefresh
+          onRefresh={handleRefresh}
+          refreshing={loading}
         />
       </View>
     </Page>

@@ -1,7 +1,7 @@
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
 import {
   CategoryCard,
@@ -30,6 +30,10 @@ const HomeScreen: React.FC = () => {
     fetchHomeData();
   }, []);
 
+  const handleRefresh = useCallback(async () => {
+    fetchHomeData();
+  }, []);
+
   const searchBarTapped = () => {
     navigation.navigate('ExploreTab');
   };
@@ -55,7 +59,11 @@ const HomeScreen: React.FC = () => {
   };
 
   return (
-    <Page isSafeAreaView>
+    <Page
+      isSafeAreaView
+      enablePullToRefresh
+      onRefresh={handleRefresh}
+      refreshing={loading}>
       <View style={style.container}>
         <View style={style.searchBarContainer}>
           <SearchBar
