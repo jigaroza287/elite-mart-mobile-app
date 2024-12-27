@@ -1,6 +1,9 @@
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 import React, { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
 import {
@@ -19,11 +22,9 @@ import { Category, Product } from '../../../redux/features/home/homeTypes';
 import useHome from '../../../redux/features/home/useHome';
 import style from './style';
 
-type HomeProp = NativeStackNavigationProp<HomeStackParamList, 'Home'> &
-  BottomTabNavigationProp<AppTabParamList, 'HomeTab'>;
+type HomeProps = NativeStackScreenProps<HomeStackParamList, 'HomeScreen'>;
 
-const HomeScreen: React.FC = () => {
-  const navigation = useNavigation<HomeProp>();
+const HomeScreen: React.FC<HomeProps> = ({ navigation }) => {
   const { homeData, loading, error, fetchHomeData } = useHome();
 
   useEffect(() => {
@@ -35,10 +36,12 @@ const HomeScreen: React.FC = () => {
   }, []);
 
   const searchBarTapped = () => {
-    navigation.navigate('ExploreTab');
+    // navigation.navigate('Explore');
   };
 
-  const handleCategoriesViewAllTap = () => {};
+  const handleCategoriesViewAllTap = () => {
+    navigation.navigate('CategoryList');
+  };
 
   const handleTopRatedViewAllTap = () => {
     navigation.navigate('ProductList', {
@@ -79,9 +82,7 @@ const HomeScreen: React.FC = () => {
           <ListView
             horizontal
             data={homeData?.data?.categories ?? []}
-            renderItem={(item: Category) => (
-              <CategoryCard imageUrl={item.image} label={item.name} />
-            )}
+            renderItem={(item: Category) => <CategoryCard category={item} />}
           />
         </HomeSection>
 

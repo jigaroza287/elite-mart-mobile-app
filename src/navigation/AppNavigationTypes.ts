@@ -9,14 +9,15 @@ export type AuthStackParamList = {
 };
 
 export type AppTabParamList = {
-  HomeTab: undefined;
-  ExploreTab: undefined;
-  CartTab: undefined;
-  YouTab: undefined;
+  Home: undefined;
+  Categories: undefined;
+  Cart: undefined;
+  You: undefined;
 };
 
 export type HomeStackParamList = {
-  Home: undefined;
+  HomeScreen: undefined;
+  CategoryList: undefined;
   ProductList: { isSearchVisible: boolean; filter?: ProductListFilters };
   ProductDetails: { product: Product };
 };
