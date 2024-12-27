@@ -4,7 +4,7 @@ export interface ProductListRequest {
   page: number;
   limit?: number;
   filter?: string;
-  categoryId?: string;
+  categoryId?: number;
   search?: string;
   sortBy?: string;
   sortOrder?: 'ASC' | 'DESC';
@@ -15,4 +15,5 @@ export interface ProductListResponse {
   data: Product[];
   currentPage: number;
   totalPages: number;
+  productCount: number;
 }

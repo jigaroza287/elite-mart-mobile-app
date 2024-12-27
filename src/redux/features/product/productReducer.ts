@@ -12,6 +12,7 @@ interface ProductsState {
   error: string | null;
   currentPage: number;
   totalPages: number;
+  productCount: number;
 }
 
 const initialState: ProductsState = {
@@ -20,6 +21,7 @@ const initialState: ProductsState = {
   error: null,
   currentPage: 1,
   totalPages: 0,
+  productCount: 0,
 };
 
 const productsReducer = (state = initialState, action: any): ProductsState => {
@@ -27,7 +29,7 @@ const productsReducer = (state = initialState, action: any): ProductsState => {
     case FETCH_PRODUCTS_REQUEST:
       return { ...state, loading: true };
     case FETCH_PRODUCTS_SUCCESS:
-      const { data, currentPage, totalPages } = action.payload;
+      const { data, currentPage, totalPages, productCount } = action.payload;
       const newData = currentPage === 1 ? data : [...state.data, ...data];
       return {
         ...state,
@@ -36,6 +38,7 @@ const productsReducer = (state = initialState, action: any): ProductsState => {
         error: null,
         currentPage: currentPage,
         totalPages: totalPages,
+        productCount,
       };
     case FETCH_PRODUCTS_FAILURE:
       return {

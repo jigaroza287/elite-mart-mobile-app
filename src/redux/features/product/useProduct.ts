@@ -5,9 +5,8 @@ import { ProductListRequest } from './productTypes';
 
 const useProducts = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { data, loading, error, currentPage, totalPages } = useSelector(
-    (state: RootState) => state.products,
-  );
+  const { data, loading, error, currentPage, totalPages, productCount } =
+    useSelector((state: RootState) => state.products);
 
   const fetchProducts = (requestParams: ProductListRequest) => {
     dispatch(fetchProductsThunk(requestParams));
@@ -20,6 +19,7 @@ const useProducts = () => {
     fetchProducts,
     currentPage,
     totalPages,
+    productCount,
   };
 };
 

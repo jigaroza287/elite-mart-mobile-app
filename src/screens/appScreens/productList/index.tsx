@@ -24,17 +24,34 @@ const ProductListScreen: React.FC<ProductListProps> = ({
   navigation,
   route,
 }) => {
-  const { isSearchVisible = false, filter } = route.params || {};
-  const { products, loading, error, fetchProducts, currentPage, totalPages } =
-    useProducts();
+  const { isSearchVisible = false, filter, category } = route.params || {};
+  const {
+    products,
+    loading,
+    error,
+    fetchProducts,
+    currentPage,
+    totalPages,
+    productCount,
+  } = useProducts();
   const productListRequestParams: ProductListRequest = {
     filter,
     page: 1,
+    categoryId: category?.id,
   };
+  const [pageTitle, setPageTitle] = React.useState<string>('');
 
   useEffect(() => {
     fetchProducts(productListRequestParams);
   }, []);
+
+  useEffect(() => {
+    let title = category ? category.name : productScreenTitle(filter);
+    if (!loading && !error) {
+      title = `${title} (${productCount})`;
+    }
+    setPageTitle(title);
+  }, [loading, error]);
 
   const handleRefresh = useCallback(async () => {
     fetchProducts(productListRequestParams);
@@ -60,7 +77,7 @@ const ProductListScreen: React.FC<ProductListProps> = ({
         <View style={style.header}>
           <BackButton onPress={() => navigation.goBack()} />
         </View>
-        <Text style={style.pageTitle}>{productScreenTitle(filter)}</Text>
+        <Text style={style.pageTitle}>{pageTitle}</Text>
         {isSearchVisible && (
           <SearchBar placeholder="Type to search..." onSearch={handleSearch} />
         )}

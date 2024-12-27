@@ -1,5 +1,11 @@
-import { Product } from '../redux/features/home/homeTypes';
+import { Category, Product } from '../redux/features/home/homeTypes';
 import { ProductListFilters } from '../utils/constants';
+
+type ProductListParams = {
+  isSearchVisible: boolean;
+  filter?: ProductListFilters;
+  category?: Category;
+};
 
 export type AuthStackParamList = {
   SignUp: undefined;
@@ -18,7 +24,7 @@ export type AppTabParamList = {
 export type HomeStackParamList = {
   HomeScreen: undefined;
   CategoryList: undefined;
-  ProductList: { isSearchVisible: boolean; filter?: ProductListFilters };
+  ProductList: ProductListParams;
   ProductDetails: { product: Product };
 };
 
