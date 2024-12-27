@@ -1,30 +1,63 @@
 import React from 'react';
-import { Dimensions, Image, Text, View } from 'react-native';
-import style from './style';
+import {
+  Image,
+  ImageStyle,
+  StyleProp,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  ViewStyle,
+} from 'react-native';
+import { Category } from '../../../redux/features/home/homeTypes';
 import { spacing } from '../../../theme';
+import styles from './style';
+
+type CategoryCardLayout = 'square' | 'row';
 
 interface CategoryCardProps {
-  imageUrl: string;
-  label: string;
+  category: Category;
+  layoutType?: CategoryCardLayout;
   size?: number;
+  onPress?: (category: Category) => void;
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({
-  imageUrl,
-  label,
+  category,
+  layoutType = 'square',
   size = spacing.huge,
+  onPress,
 }) => {
+  const containerStyle: StyleProp<ViewStyle> = [
+    layoutType === 'row' ? styles.rowContainer : styles.squareContainer,
+    { marginRight: layoutType === 'row' ? 0 : spacing.medium },
+  ];
+
+  const imageStyle: StyleProp<ImageStyle> = {
+    width: size,
+    height: size,
+    borderRadius: size / 2,
+  };
+
+  const labelStyle: StyleProp<TextStyle> = [
+    styles.label,
+    layoutType === 'row'
+      ? { marginLeft: spacing.medium }
+      : { marginTop: spacing.small },
+  ];
+
   return (
-    <View style={[style.container, { width: size }]}>
+    <TouchableOpacity
+      style={containerStyle}
+      onPress={() => onPress?.(category)}>
       <Image
-        source={{ uri: imageUrl }}
-        style={[style.image, { width: size, height: size }]}
+        source={{ uri: category.image }}
+        style={imageStyle}
         resizeMode="cover"
       />
-      <Text style={style.label} numberOfLines={1}>
-        {label}
+      <Text style={labelStyle} numberOfLines={1}>
+        {category.name}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -1,20 +1,18 @@
-import { Dimensions, StyleSheet } from 'react-native';
-import normalize from 'react-native-normalize';
+import { StyleSheet } from 'react-native';
 import { spacing, typography } from '../../../theme';
 
-const imageSize = Dimensions.get('window').width / 6;
-
 export default StyleSheet.create({
-  container: {
+  rowContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginRight: spacing.medium,
+    width: '100%',
+    padding: spacing.small,
   },
-  image: {
-    borderRadius: normalize(imageSize / 2),
+  squareContainer: {
+    alignItems: 'center',
   },
   label: {
     ...typography.tiny,
-    marginTop: spacing.small,
-    textAlign: 'center',
+    flex: 1,
   },
 });

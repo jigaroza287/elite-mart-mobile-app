@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   linkButtonTextStyle: {
     ...typography.small,
-    color: colors.blue,
+    color: colors.primary,
     marginTop: spacing.tiny,
   },
 });

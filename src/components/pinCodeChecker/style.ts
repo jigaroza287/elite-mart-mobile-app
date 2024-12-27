@@ -22,7 +22,7 @@ export default StyleSheet.create({
   },
   buttonText: {
     ...typography.body3,
-    color: colors.blue,
+    color: colors.primary,
   },
   errorText: {
     ...typography.body3,
