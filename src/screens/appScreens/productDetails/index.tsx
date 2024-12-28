@@ -15,7 +15,7 @@ import {
   StarRating,
 } from '../../../components';
 import Page from '../../../components/page';
-import { HomeStackParamList } from '../../../navigation/AppNavigationTypes';
+import { RootStackParamList } from '../../../navigation/AppNavigationTypes';
 import { ProductVariant } from '../../../redux/features/home/homeTypes';
 import usePinCodeCheck from '../../../redux/features/pinCodeCheck/usePinCodeCheck';
 import { useLoadingOverlay } from '../../../redux/hooks/useLoadingOverlay';
@@ -26,7 +26,7 @@ import IconDescription from './components/IconDescription';
 import style from './style';
 
 type ProductDetailsProps = NativeStackScreenProps<
-  HomeStackParamList,
+  RootStackParamList,
   'ProductDetails'
 >;
 

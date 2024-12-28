@@ -8,7 +8,7 @@ import {
   SearchBar,
 } from '../../../components';
 import Page from '../../../components/page';
-import { HomeStackParamList } from '../../../navigation/AppNavigationTypes';
+import { RootStackParamList } from '../../../navigation/AppNavigationTypes';
 import { Product } from '../../../redux/features/home/homeTypes';
 import { ProductListRequest } from '../../../redux/features/product/productTypes';
 import useProducts from '../../../redux/features/product/useProduct';
@@ -16,7 +16,7 @@ import { productScreenTitle } from '../../../utils/functionUtils';
 import style from './style';
 
 type ProductListProps = NativeStackScreenProps<
-  HomeStackParamList,
+  RootStackParamList,
   'ProductList'
 >;
 

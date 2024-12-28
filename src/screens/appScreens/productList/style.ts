@@ -12,6 +12,7 @@ export default StyleSheet.create({
   pageTitle: {
     ...typography.title2Black,
     marginTop: spacing.small,
+    marginLeft: spacing.xSmall,
   },
   header: {
     flexDirection: 'row',

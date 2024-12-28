@@ -11,14 +11,9 @@ import ProductDetailsScreen from '../screens/appScreens/productDetails';
 import ProductListScreen from '../screens/appScreens/productList';
 import ProfileScreen from '../screens/appScreens/profile';
 import { colors, typography } from '../theme';
-import {
-  AppTabParamList,
-  HomeStackParamList,
-  RootStackParamList,
-} from './AppNavigationTypes';
+import { AppTabParamList, RootStackParamList } from './AppNavigationTypes';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
 
@@ -55,25 +50,11 @@ const AppTabNavigator = () => {
         tabBarInactiveTintColor: colors.grey,
         tabBarLabelStyle: { ...typography.small },
       })}>
-      <Tab.Screen name="Home" component={HomeStackNavigator} />
-      <Tab.Screen name="Categories" component={OffersScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Categories" component={CategoryListScreen} />
       <Tab.Screen name="Cart" component={CartScreen} />
       <Tab.Screen name="You" component={ProfileScreen} />
     </Tab.Navigator>
-  );
-};
-
-const HomeStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
-      <HomeStack.Screen name="CategoryList" component={CategoryListScreen} />
-      <HomeStack.Screen name="ProductList" component={ProductListScreen} />
-      <HomeStack.Screen
-        name="ProductDetails"
-        component={ProductDetailsScreen}
-      />
-    </Stack.Navigator>
   );
 };
 
@@ -82,6 +63,8 @@ const AppNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="App" component={AppTabNavigator} />
+        <Stack.Screen name="ProductList" component={ProductListScreen} />
+        <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

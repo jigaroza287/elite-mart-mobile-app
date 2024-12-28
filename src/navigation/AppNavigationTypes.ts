@@ -21,14 +21,9 @@ export type AppTabParamList = {
   You: undefined;
 };
 
-export type HomeStackParamList = {
-  HomeScreen: undefined;
-  CategoryList: undefined;
-  ProductList: ProductListParams;
-  ProductDetails: { product: Product };
-};
-
 export type RootStackParamList = {
   Auth: undefined;
   App: undefined;
+  ProductList: ProductListParams;
+  ProductDetails: { product: Product };
 };

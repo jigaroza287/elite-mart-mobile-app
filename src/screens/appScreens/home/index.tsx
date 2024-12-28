@@ -1,4 +1,9 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import {
+  CompositeNavigationProp,
+  useNavigation,
+} from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
 import {
@@ -9,14 +14,21 @@ import {
   SearchBar,
 } from '../../../components';
 import Page from '../../../components/page';
-import { HomeStackParamList } from '../../../navigation/AppNavigationTypes';
+import {
+  AppTabParamList,
+  RootStackParamList,
+} from '../../../navigation/AppNavigationTypes';
 import { Category, Product } from '../../../redux/features/home/homeTypes';
 import useHome from '../../../redux/features/home/useHome';
 import style from './style';
 
-type HomeProps = NativeStackScreenProps<HomeStackParamList, 'HomeScreen'>;
+type HomeScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<AppTabParamList, 'Home'>,
+  NativeStackNavigationProp<RootStackParamList>
+>;
 
-const HomeScreen: React.FC<HomeProps> = ({ navigation }) => {
+const HomeScreen: React.FC = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
   const { homeData, loading, error, fetchHomeData } = useHome();
 
   useEffect(() => {
@@ -28,11 +40,11 @@ const HomeScreen: React.FC<HomeProps> = ({ navigation }) => {
   }, []);
 
   const searchBarTapped = () => {
-    // navigation.navigate('Explore');
+    // navigation.navigate('Categories');
   };
 
   const handleCategoriesViewAllTap = () => {
-    navigation.navigate('CategoryList');
+    navigation.navigate('Categories');
   };
 
   const handleTopRatedViewAllTap = () => {

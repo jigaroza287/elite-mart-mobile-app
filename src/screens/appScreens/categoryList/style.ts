@@ -13,10 +13,11 @@ export default StyleSheet.create({
   pageTitle: {
     ...typography.title2Black,
     marginTop: spacing.small,
+    marginLeft: spacing.small,
   },
   header: {
-    flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: spacing.medium,
   },
   productContainer: {
     flex: 1,
