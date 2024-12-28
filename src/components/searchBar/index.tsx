@@ -10,6 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../../theme';
 import style from './style';
+import useDebouncedCallback from '../../redux/hooks/useDebounce';
 
 interface SearchBarProps extends TextInputProps {
   placeholder?: string;
@@ -27,9 +28,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   const [query, setQuery] = useState<string>('');
 
-  const handleSearch = (text: string) => {
-    setQuery(text);
+  const handleSearch = useDebouncedCallback((text: string) => {
     onSearch?.(text);
+  }, 300);
+
+  const handleChange = (text: string) => {
+    setQuery(text);
+    handleSearch(text);
   };
 
   return (
@@ -41,7 +46,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         ) : (
           <TextInput
             value={query}
-            onChangeText={handleSearch}
+            onChangeText={handleChange}
             placeholder={placeholder}
             placeholderTextColor={colors.grey}
             style={style.input}
