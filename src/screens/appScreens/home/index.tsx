@@ -39,8 +39,10 @@ const HomeScreen: React.FC = () => {
     fetchHomeData();
   }, []);
 
-  const searchBarTapped = () => {
-    // navigation.navigate('Categories');
+  const handleSearch = (query: string) => {
+    navigation.navigate('ProductList', {
+      search: query,
+    });
   };
 
   const handleCategoriesViewAllTap = () => {
@@ -49,21 +51,18 @@ const HomeScreen: React.FC = () => {
 
   const handleTopRatedViewAllTap = () => {
     navigation.navigate('ProductList', {
-      isSearchVisible: false,
       filter: 'top_rated',
     });
   };
 
   const handleNewArrivalViewAllTap = () => {
     navigation.navigate('ProductList', {
-      isSearchVisible: false,
       filter: 'new_arrivals',
     });
   };
 
   const handleCategoryTap = (category: Category) => {
     navigation.navigate('ProductList', {
-      isSearchVisible: false,
       category: category,
     });
   };
@@ -80,10 +79,7 @@ const HomeScreen: React.FC = () => {
       refreshing={loading}>
       <View style={style.container}>
         <View style={style.searchBarContainer}>
-          <SearchBar
-            placeholder="Type to search..."
-            onPress={searchBarTapped}
-          />
+          <SearchBar placeholder="Type to search..." onSearch={handleSearch} />
         </View>
 
         {/* Categories Section */}

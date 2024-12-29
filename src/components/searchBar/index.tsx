@@ -24,17 +24,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
   onPress,
   containerStyle,
+  defaultValue,
   ...props
 }) => {
-  const [query, setQuery] = useState<string>('');
+  const [query, setQuery] = useState<string>(defaultValue || '');
 
-  const handleSearch = useDebouncedCallback((text: string) => {
-    onSearch?.(text);
-  }, 300);
-
-  const handleChange = (text: string) => {
-    setQuery(text);
-    handleSearch(text);
+  const handleSearch = () => {
+    onSearch?.(query);
   };
 
   return (
@@ -46,7 +42,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
         ) : (
           <TextInput
             value={query}
-            onChangeText={handleChange}
+            onChangeText={setQuery}
+            onEndEditing={handleSearch}
             placeholder={placeholder}
             placeholderTextColor={colors.grey}
             style={style.input}

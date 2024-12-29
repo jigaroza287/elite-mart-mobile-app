@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 import {
   BackButton,
@@ -24,7 +24,7 @@ const ProductListScreen: React.FC<ProductListProps> = ({
   navigation,
   route,
 }) => {
-  const { isSearchVisible = false, filter, category } = route.params || {};
+  const { filter, category, search = '' } = route.params || {};
   const {
     products,
     loading,
@@ -34,38 +34,47 @@ const ProductListScreen: React.FC<ProductListProps> = ({
     totalPages,
     productCount,
   } = useProducts();
-  const productListRequestParams: ProductListRequest = {
-    filter,
-    page: 1,
-    categoryId: category?.id,
-  };
-  const [pageTitle, setPageTitle] = React.useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>(search);
+  const productListRequestParams: ProductListRequest = useMemo(
+    () => ({
+      filter,
+      page: 1,
+      categoryId: category?.id,
+      search: searchQuery,
+    }),
+    [filter, category?.id, searchQuery],
+  );
+
+  const pageTitle = useMemo(() => {
+    const baseTitle = category?.name || productScreenTitle(filter);
+    return baseTitle
+      ? `${baseTitle}${
+          !loading && !error && productCount ? ` (${productCount})` : ''
+        }`
+      : '';
+  }, [category?.name, filter, productCount, loading, error]);
+
+  const showPageTitle = Boolean(pageTitle);
 
   useEffect(() => {
     fetchProducts(productListRequestParams);
   }, []);
 
-  useEffect(() => {
-    let title = category ? category.name : productScreenTitle(filter);
-    if (!loading && !error) {
-      title = `${title} (${productCount})`;
-    }
-    setPageTitle(title);
-  }, [loading, error]);
+  const handleRefresh = useCallback(() => {
+    fetchProducts({ ...productListRequestParams, page: 1 });
+  }, [fetchProducts, productListRequestParams]);
 
-  const handleRefresh = useCallback(async () => {
-    fetchProducts(productListRequestParams);
-  }, []);
-
-  const loadMoreProducts = () => {
+  const loadMoreProducts = useCallback(() => {
     if (!loading && currentPage < totalPages) {
       fetchProducts({ ...productListRequestParams, page: currentPage + 1 });
     }
-  };
-
-  const handleSearch = (query: string) => {
-    console.log('You searched: ', query);
-  };
+  }, [
+    fetchProducts,
+    productListRequestParams,
+    currentPage,
+    totalPages,
+    loading,
+  ]);
 
   const handleProductTap = (product: Product) => {
     navigation.navigate('ProductDetails', { product });
@@ -77,9 +86,13 @@ const ProductListScreen: React.FC<ProductListProps> = ({
         <View style={style.header}>
           <BackButton onPress={() => navigation.goBack()} />
         </View>
-        <Text style={style.pageTitle}>{pageTitle}</Text>
-        {isSearchVisible && (
-          <SearchBar placeholder="Type to search..." onSearch={handleSearch} />
+        {showPageTitle && <Text style={style.pageTitle}>{pageTitle}</Text>}
+        {search && (
+          <SearchBar
+            placeholder="Type to search..."
+            onSearch={setSearchQuery}
+            defaultValue={search}
+          />
         )}
         <ListView
           numColumns={2}

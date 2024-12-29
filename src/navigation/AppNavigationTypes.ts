@@ -2,9 +2,9 @@ import { Category, Product } from '../redux/features/home/homeTypes';
 import { ProductListFilters } from '../utils/constants';
 
 type ProductListParams = {
-  isSearchVisible: boolean;
   filter?: ProductListFilters;
   category?: Category;
+  search?: string;
 };
 
 export type AuthStackParamList = {

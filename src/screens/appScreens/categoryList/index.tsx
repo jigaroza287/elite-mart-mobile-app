@@ -35,7 +35,6 @@ const CategoryListScreen: React.FC = () => {
 
   const handleCategoryTap = (category: Category) => {
     navigation.navigate('ProductList', {
-      isSearchVisible: false,
       category: category,
     });
   };
