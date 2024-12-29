@@ -22,3 +22,10 @@ const useDebouncedCallback = (callback: CallbackFunction, delay: number) => {
 };
 
 export default useDebouncedCallback;
+
+/*
+Usage Example:
+  const handleSearch = useDebouncedCallback((text: string) => {
+    onSearch?.(text);
+  }, 300);
+*/
