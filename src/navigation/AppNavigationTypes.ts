@@ -1,7 +1,7 @@
 import { Category, Product } from '../redux/features/home/homeTypes';
 import { ProductListFilters } from '../utils/constants';
 
-type ProductListParams = {
+export type ProductListParams = {
   filter?: ProductListFilters;
   category?: Category;
   search?: string;

@@ -10,7 +10,6 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../../theme';
 import style from './style';
-import useDebouncedCallback from '../../redux/hooks/useDebounce';
 
 interface SearchBarProps extends TextInputProps {
   placeholder?: string;
@@ -47,6 +46,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             placeholder={placeholder}
             placeholderTextColor={colors.grey}
             style={style.input}
+            clearButtonMode="unless-editing"
             {...props}
           />
         )}

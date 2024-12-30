@@ -16,11 +16,13 @@ import {
 import Page from '../../../components/page';
 import {
   AppTabParamList,
+  ProductListParams,
   RootStackParamList,
 } from '../../../navigation/AppNavigationTypes';
 import { Category, Product } from '../../../redux/features/home/homeTypes';
 import useHome from '../../../redux/features/home/useHome';
 import style from './style';
+import { ProductListFilters } from '../../../utils/constants';
 
 type HomeScreenNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<AppTabParamList, 'Home'>,
@@ -39,32 +41,25 @@ const HomeScreen: React.FC = () => {
     fetchHomeData();
   }, []);
 
-  const handleSearch = (query: string) => {
-    navigation.navigate('ProductList', {
-      search: query,
+  const hasValidParams = (params: ProductListParams): boolean => {
+    return Object.entries(params).some(([key, value]) => {
+      if (key === 'search') {
+        return value !== '';
+      }
+      return value !== undefined;
     });
+  };
+
+  const handleProductListNavigation = (params: ProductListParams) => {
+    if (hasValidParams(params)) {
+      navigation.navigate('ProductList', {
+        ...params,
+      });
+    }
   };
 
   const handleCategoriesViewAllTap = () => {
     navigation.navigate('Categories');
-  };
-
-  const handleTopRatedViewAllTap = () => {
-    navigation.navigate('ProductList', {
-      filter: 'top_rated',
-    });
-  };
-
-  const handleNewArrivalViewAllTap = () => {
-    navigation.navigate('ProductList', {
-      filter: 'new_arrivals',
-    });
-  };
-
-  const handleCategoryTap = (category: Category) => {
-    navigation.navigate('ProductList', {
-      category: category,
-    });
   };
 
   const handleProductTap = (product: Product) => {
@@ -79,7 +74,10 @@ const HomeScreen: React.FC = () => {
       refreshing={loading}>
       <View style={style.container}>
         <View style={style.searchBarContainer}>
-          <SearchBar placeholder="Type to search..." onSearch={handleSearch} />
+          <SearchBar
+            placeholder="Type to search..."
+            onSearch={search => handleProductListNavigation({ search })}
+          />
         </View>
 
         {/* Categories Section */}
@@ -90,7 +88,10 @@ const HomeScreen: React.FC = () => {
             horizontal
             data={homeData?.data?.categories ?? []}
             renderItem={(item: Category) => (
-              <CategoryCard category={item} onPress={handleCategoryTap} />
+              <CategoryCard
+                category={item}
+                onPress={category => handleProductListNavigation({ category })}
+              />
             )}
           />
         </HomeSection>
@@ -98,7 +99,9 @@ const HomeScreen: React.FC = () => {
         {/* Top Selling Section */}
         <HomeSection
           title="Top Rated"
-          onViewAllPress={handleTopRatedViewAllTap}>
+          onViewAllPress={() =>
+            handleProductListNavigation({ filter: 'top_rated' })
+          }>
           <ListView
             horizontal
             data={homeData?.data?.topSellingProducts ?? []}
@@ -115,7 +118,9 @@ const HomeScreen: React.FC = () => {
         {/* New Arrival Section */}
         <HomeSection
           title="New Arrival"
-          onViewAllPress={handleNewArrivalViewAllTap}>
+          onViewAllPress={() =>
+            handleProductListNavigation({ filter: 'new_arrivals' })
+          }>
           <ListView
             horizontal
             data={homeData?.data?.newArrivals ?? []}
