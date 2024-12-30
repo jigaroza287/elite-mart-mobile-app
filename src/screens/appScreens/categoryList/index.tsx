@@ -63,6 +63,7 @@ const CategoryListScreen: React.FC = () => {
           enablePullToRefresh
           onRefresh={handleRefresh}
           refreshing={loading}
+          showEmptyView
         />
       </View>
     </Page>

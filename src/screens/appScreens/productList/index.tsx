@@ -65,12 +65,13 @@ const ProductListScreen: React.FC<ProductListProps> = ({
   }, [fetchProducts, productListRequestParams]);
 
   const loadMoreProducts = useCallback(() => {
-    if (!loading && currentPage < totalPages) {
+    if (products.length > 0 && !loading && currentPage < totalPages) {
       fetchProducts({ ...productListRequestParams, page: currentPage + 1 });
     }
   }, [
     fetchProducts,
     productListRequestParams,
+    products,
     currentPage,
     totalPages,
     loading,
@@ -79,6 +80,13 @@ const ProductListScreen: React.FC<ProductListProps> = ({
   const handleProductTap = (product: Product) => {
     navigation.navigate('ProductDetails', { product });
   };
+
+  const footerComponent = useMemo(() => {
+    if (products.length > 0 && loading) {
+      return <ActivityIndicator size="large" />;
+    }
+    return null;
+  }, [products, loading]);
 
   return (
     <Page isSafeAreaView scrollBehavior="none">
@@ -107,12 +115,11 @@ const ProductListScreen: React.FC<ProductListProps> = ({
           style={style.contentContainer}
           onEndReached={loadMoreProducts}
           onEndReachedThreshold={0.5}
-          ListFooterComponent={
-            loading ? <ActivityIndicator size="large" /> : null
-          }
-          enablePullToRefresh
+          ListFooterComponent={footerComponent}
+          enablePullToRefresh={products.length > 0}
           onRefresh={handleRefresh}
           refreshing={loading}
+          showEmptyView
         />
       </View>
     </Page>
