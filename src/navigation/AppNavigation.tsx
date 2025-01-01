@@ -5,7 +5,6 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CartScreen from '../screens/appScreens/cart';
 import CategoryListScreen from '../screens/appScreens/categoryList';
-import OffersScreen from '../screens/appScreens/explore';
 import HomeScreen from '../screens/appScreens/home';
 import ProductDetailsScreen from '../screens/appScreens/productDetails';
 import ProductListScreen from '../screens/appScreens/productList';

@@ -79,7 +79,6 @@ const HomeScreen: React.FC = () => {
             onSearch={search => handleProductListNavigation({ search })}
           />
         </View>
-
         {/* Categories Section */}
         <HomeSection
           title="Categories"
