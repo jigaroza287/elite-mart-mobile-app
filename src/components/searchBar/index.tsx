@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Keyboard,
   Text,
   TextInput,
   TextInputProps,
@@ -30,6 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   const handleSearch = () => {
     onSearch?.(query);
+    Keyboard.dismiss();
   };
 
   return (

@@ -10,10 +10,14 @@ export interface ProductListRequest {
   sortOrder?: 'ASC' | 'DESC';
 }
 
+export interface ProductMeta {
+  productCount: number;
+  currentPage: number;
+  totalPages: number;
+}
+
 export interface ProductListResponse {
   success: boolean;
   data: Product[];
-  currentPage: number;
-  totalPages: number;
-  productCount: number;
+  meta: ProductMeta;
 }

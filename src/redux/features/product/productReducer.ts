@@ -4,7 +4,6 @@ import {
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
 } from './productActions';
-import { ProductListResponse } from './productTypes';
 
 interface ProductsState {
   loading: boolean;
@@ -29,16 +28,16 @@ const productsReducer = (state = initialState, action: any): ProductsState => {
     case FETCH_PRODUCTS_REQUEST:
       return { ...state, loading: true };
     case FETCH_PRODUCTS_SUCCESS:
-      const { data, currentPage, totalPages, productCount } = action.payload;
-      const newData = currentPage === 1 ? data : [...state.data, ...data];
+      const { data, meta } = action.payload;
+      const newData = meta.currentPage === 1 ? data : [...state.data, ...data];
       return {
         ...state,
         loading: false,
         data: newData,
         error: null,
-        currentPage: currentPage,
-        totalPages: totalPages,
-        productCount,
+        currentPage: meta.currentPage,
+        totalPages: meta.totalPages,
+        productCount: meta.productCount,
       };
     case FETCH_PRODUCTS_FAILURE:
       return {
