@@ -39,8 +39,12 @@ const CategoryListScreen: React.FC = () => {
     });
   };
 
-  const handleSearch = (query: string) => {
-    console.log('You searched: ', query);
+  const handleSearch = (search: string) => {
+    if (search.length > 0) {
+      navigation.navigate('ProductList', {
+        search: search,
+      });
+    }
   };
 
   return (
