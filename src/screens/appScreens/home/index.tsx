@@ -8,7 +8,6 @@ import React, { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
 import {
   CategoryCard,
-  HomeSection,
   ListView,
   ProductCard,
   SearchBar,
@@ -21,8 +20,8 @@ import {
 } from '../../../navigation/AppNavigationTypes';
 import { Category, Product } from '../../../redux/features/home/homeTypes';
 import useHome from '../../../redux/features/home/useHome';
+import HomeSection from './components/homeSection';
 import style from './style';
-import { ProductListFilters } from '../../../utils/constants';
 
 type HomeScreenNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<AppTabParamList, 'Home'>,

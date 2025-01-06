@@ -1,4 +1,5 @@
 import BackButton from './backButton';
+import BottomSheet from './bottomSheet';
 import BulletList from './bulletList';
 import Button from './button';
 import CategoryCard from './cards/categoryCard';
@@ -6,7 +7,6 @@ import ColorCard from './cards/colorCard';
 import ProductCard from './cards/productCard';
 import SizeCard from './cards/sizeCard';
 import EmptyView from './emptyView';
-import HomeSection from './homeSection';
 import IconButton from './iconButton';
 import ImageGallery from './imageGallery';
 import ListView from './listView';
@@ -18,12 +18,12 @@ import StarRating from './starRating';
 
 export {
   BackButton,
+  BottomSheet,
   BulletList,
   Button,
   CategoryCard,
   ColorCard,
   EmptyView,
-  HomeSection,
   IconButton,
   ImageGallery,
   ListView,

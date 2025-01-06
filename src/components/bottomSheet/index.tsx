@@ -2,7 +2,7 @@ import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import style from './style';
 
-export type ReusableBottomSheetRef = {
+export type BottomSheetRef = {
   openBottomSheet: () => void;
   closeBottomSheet: () => void;
 };
@@ -12,7 +12,7 @@ type ReusableBottomSheetProps = {
 };
 
 const ReusableBottomSheet = forwardRef<
-  ReusableBottomSheetRef,
+  BottomSheetRef,
   ReusableBottomSheetProps
 >(({ children }, ref) => {
   const bottomSheetRef = useRef<BottomSheet>(null);

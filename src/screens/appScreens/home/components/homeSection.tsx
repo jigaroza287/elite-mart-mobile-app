@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import style from './style';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { spacing, typography } from '../../../../theme';
 
 interface HomeSectionProps {
   title: string;
@@ -23,5 +23,24 @@ const HomeSection: React.FC<HomeSectionProps> = ({
     {children}
   </View>
 );
+
+const style = StyleSheet.create({
+  sectionContainer: {
+    marginVertical: spacing.medium,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: spacing.medium,
+  },
+  title: {
+    ...typography.title3Bold,
+  },
+  viewAll: {
+    ...typography.body1,
+    marginRight: spacing.large,
+  },
+});
 
 export default HomeSection;
