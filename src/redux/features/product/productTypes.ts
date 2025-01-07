@@ -1,3 +1,4 @@
+import { Demographics } from '../../../utils/constants';
 import { Product } from '../home/homeTypes';
 
 export interface ProductListRequest {
@@ -5,9 +6,12 @@ export interface ProductListRequest {
   limit?: number;
   filter?: string;
   categoryId?: number;
+  demographic?: string;
   search?: string;
   sortBy?: string;
   sortOrder?: 'ASC' | 'DESC';
+  minPrice?: string;
+  maxPrice?: string;
 }
 
 export interface ProductMeta {
