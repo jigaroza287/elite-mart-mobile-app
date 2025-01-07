@@ -3,9 +3,9 @@ import {
   FlatList,
   FlatListProps,
   ListRenderItem,
+  RefreshControl,
   ViewStyle,
 } from 'react-native';
-import { RefreshControl } from 'react-native-gesture-handler';
 import EmptyView from '../emptyView';
 
 interface ListProps<T> extends Omit<FlatListProps<T>, 'renderItem'> {
