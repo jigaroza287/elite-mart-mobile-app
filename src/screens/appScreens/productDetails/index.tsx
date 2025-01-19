@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import normalize from 'react-native-normalize';
 import {
   BackButton,
@@ -117,8 +117,10 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
     return selectedSize ? `(${selectedSize})` : undefined;
   };
 
+  const handleAddToCartTapped = () => {};
+
   return (
-    <>
+    <View style={style.container}>
       <SafeAreaView>
         {/* Header */}
         <View style={style.header}>
@@ -236,7 +238,17 @@ const ProductDetailsScreen: React.FC<ProductDetailsProps> = ({
           </SectionContainer>
         </View>
       </Page>
-    </>
+
+      {/* Add to Cart view */}
+      <View style={style.addToCartView}>
+        <Text style={style.totalPriceText}>
+          {priceWithFormat(defaultVariant?.price)}
+        </Text>
+        <TouchableOpacity onPress={handleAddToCartTapped}>
+          <Text style={style.addToCartButton}>Add to Cart</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 

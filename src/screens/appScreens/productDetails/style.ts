@@ -8,6 +8,10 @@ const bodyText = {
 };
 
 export default StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.light,
+  },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -57,5 +61,23 @@ export default StyleSheet.create({
   },
   deliveryDetailsContainer: {
     marginTop: spacing.medium,
+  },
+  addToCartView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: spacing.large,
+    paddingVertical: spacing.medium,
+    margin: spacing.large,
+    backgroundColor: colors.primary,
+    borderRadius: spacing.xLarge,
+  },
+  totalPriceText: {
+    ...typography.title3Bold,
+    color: colors.light,
+  },
+  addToCartButton: {
+    ...typography.title3,
+    color: colors.light,
   },
 });
